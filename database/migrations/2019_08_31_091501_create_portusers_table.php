@@ -15,10 +15,11 @@ class CreatePortusersTable extends Migration
     {
         Schema::create('portusers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
             $table->string('name', 100);
             $table->integer('company_id');
             $table->date('expires_on');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
