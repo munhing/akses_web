@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Portuser
  * @package App\Models
- * @version August 31, 2019, 3:29 pm UTC
+ * @version August 31, 2019, 11:18 pm UTC
  *
  * @property string uuid
  * @property string name

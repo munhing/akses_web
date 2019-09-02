@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class PortuserRepository
  * @package App\Repositories
- * @version August 31, 2019, 3:29 pm UTC
+ * @version August 31, 2019, 11:18 pm UTC
 */
 
 class PortuserRepository extends BaseRepository

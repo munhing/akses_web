@@ -1,13 +1,11 @@
-<div class="table-responsive">
-    <table class="table" id="portusers-table">
+<div class="table-responsive-sm">
+    <table class="table table-striped" id="portusers-table">
         <thead>
-            <tr>
-                <th>Uuid</th>
+            <th>Uuid</th>
         <th>Name</th>
         <th>Company Id</th>
         <th>Expires On</th>
-                <th colspan="3">Action</th>
-            </tr>
+            <th colspan="3">Action</th>
         </thead>
         <tbody>
         @foreach($portusers as $portuser)
@@ -19,9 +17,9 @@
                 <td>
                     {!! Form::open(['route' => ['portusers.destroy', $portuser->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{!! route('portusers.show', [$portuser->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{!! route('portusers.edit', [$portuser->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        <a href="{!! route('portusers.show', [$portuser->id]) !!}" class='btn btn-ghost-success'><i class="fa fa-eye"></i></a>
+                        <a href="{!! route('portusers.edit', [$portuser->id]) !!}" class='btn btn-ghost-info'><i class="fa fa-edit"></i></a>
+                        {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-ghost-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

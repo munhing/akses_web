@@ -1,24 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content-header">
-        <h1>
-            Company
-        </h1>
-    </section>
-    <div class="content">
-        @include('adminlte-templates::common.errors')
-        <div class="box box-primary">
-
-            <div class="box-body">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+         <a href="{!! route('companies.index') !!}">Company</a>
+      </li>
+      <li class="breadcrumb-item active">Create</li>
+    </ol>
+     <div class="container-fluid">
+          <div class="animated fadeIn">
+                @include('coreui-templates::common.errors')
                 <div class="row">
-                    {!! Form::open(['route' => 'companies.store']) !!}
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-plus-square-o fa-lg"></i>
+                                <strong>Create Company</strong>
+                            </div>
+                            <div class="card-body">
+                                {!! Form::open(['route' => 'companies.store']) !!}
 
-                        @include('companies.fields')
+                                   @include('companies.fields')
 
-                    {!! Form::close() !!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+           </div>
     </div>
 @endsection

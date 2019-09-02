@@ -13,16 +13,21 @@
 <!-- Email Verified At Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('email_verified_at', 'Email Verified At:') !!}
-    {!! Form::date('email_verified_at', null, ['class' => 'form-control','id'=>'email_verified_at']) !!}
+    {!! Form::text('email_verified_at', null, ['class' => 'form-control','id'=>'email_verified_at']) !!}
 </div>
 
 @section('scripts')
-    <script type="text/javascript">
-        $('#email_verified_at').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
+   <script type="text/javascript">
+           $('#email_verified_at').datetimepicker({
+               format: 'YYYY-MM-DD HH:mm:ss',
+               useCurrent: true,
+               icons: {
+                   up: "icon-arrow-up-circle icons font-2xl",
+                   down: "icon-arrow-down-circle icons font-2xl"
+               },
+               sideBySide: true
+           })
+       </script>
 @endsection
 
 <!-- Password Field -->

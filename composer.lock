@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8f5e38959185864281b78864ebe9a28",
+    "content-hash": "94f636c5084120bd4e453bb274076ede",
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -61,6 +61,52 @@
                 "swagger"
             ],
             "time": "2019-04-25T14:50:14+00:00"
+        },
+        {
+            "name": "bacon/bacon-qr-code",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "5a91b62b9d37cee635bbf8d553f4546057250bee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/5a91b62b9d37cee635bbf8d553f4546057250bee",
+                "reference": "5a91b62b9d37cee635bbf8d553f4546057250bee",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "ext-gd": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "BaconQrCode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "role": "Developer",
+                    "email": "mail@dasprids.de",
+                    "homepage": "http://www.dasprids.de"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "time": "2017-10-17T09:59:25+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -736,34 +782,27 @@
             "time": "2019-07-29T16:49:45+00:00"
         },
         {
-            "name": "infyomlabs/adminlte-templates",
+            "name": "infyomlabs/coreui-templates",
             "version": "5.8.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/InfyOmLabs/adminlte-templates.git",
-                "reference": "a0ec2259e51f915333459a96545f29010035b1f1"
+                "url": "https://github.com/InfyOmLabs/coreui-templates.git",
+                "reference": "f529886eff69e86e77c0eb6f0eac573fb67d343d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/adminlte-templates/zipball/a0ec2259e51f915333459a96545f29010035b1f1",
-                "reference": "a0ec2259e51f915333459a96545f29010035b1f1",
+                "url": "https://api.github.com/repos/InfyOmLabs/coreui-templates/zipball/f529886eff69e86e77c0eb6f0eac573fb67d343d",
+                "reference": "f529886eff69e86e77c0eb6f0eac573fb67d343d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.8.*",
+                "illuminate/support": "~5.0",
                 "php": ">=5.5.9"
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "\\InfyOm\\AdminLTETemplates\\AdminLTETemplatesServiceProvider"
-                    ]
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "InfyOm\\AdminLTETemplates\\": "src/"
+                    "InfyOm\\CoreUITemplates\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -776,16 +815,16 @@
                     "email": "me@mitul.me"
                 }
             ],
-            "description": "AdminLTE templates for InfyOm Laravel Generator",
+            "description": "CoreUI templates for InfyOm Laravel Generator",
             "keywords": [
-                "AdminLTE",
                 "bootstrap",
+                "coreui",
                 "generator",
                 "infyom",
                 "laravel",
                 "templates"
             ],
-            "time": "2019-05-16T03:20:43+00:00"
+            "time": "2019-06-29T09:23:05+00:00"
         },
         {
             "name": "infyomlabs/laravel-generator",
@@ -1474,16 +1513,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.23.1",
+            "version": "2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "767617a047e5b8b8b3b0b6023a2650847ed7df02"
+                "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/767617a047e5b8b8b3b0b6023a2650847ed7df02",
-                "reference": "767617a047e5b8b8b3b0b6023a2650847ed7df02",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/934459c5ac0658bc765ad1e53512c7c77adcac29",
+                "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29",
                 "shasum": ""
             },
             "require": {
@@ -1537,20 +1576,20 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-08-17T13:57:34+00:00"
+            "time": "2019-08-31T16:37:55+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.2.3",
+            "version": "v4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "e612609022e935f3d0337c1295176505b41188c8"
+                "reference": "97e59c7a16464196a8b9c77c47df68e4a39a45c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/e612609022e935f3d0337c1295176505b41188c8",
-                "reference": "e612609022e935f3d0337c1295176505b41188c8",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/97e59c7a16464196a8b9c77c47df68e4a39a45c4",
+                "reference": "97e59c7a16464196a8b9c77c47df68e4a39a45c4",
                 "shasum": ""
             },
             "require": {
@@ -1588,7 +1627,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-08-12T20:17:41+00:00"
+            "time": "2019-09-01T07:51:21+00:00"
         },
         {
             "name": "opis/closure",
@@ -2150,17 +2189,78 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
-            "name": "swagger-api/swagger-ui",
-            "version": "v3.23.6",
+            "name": "simplesoftwareio/simple-qrcode",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "5e454feb332edeac712f69c7ecb5937512acc2fc"
+                "url": "https://github.com/SimpleSoftwareIO/simple-qrcode.git",
+                "reference": "90b2282dd29be1e52565e9832dc23af41610ea07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/5e454feb332edeac712f69c7ecb5937512acc2fc",
-                "reference": "5e454feb332edeac712f69c7ecb5937512acc2fc",
+                "url": "https://api.github.com/repos/SimpleSoftwareIO/simple-qrcode/zipball/90b2282dd29be1e52565e9832dc23af41610ea07",
+                "reference": "90b2282dd29be1e52565e9832dc23af41610ea07",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "1.0.*",
+                "ext-gd": "*",
+                "illuminate/support": ">=5.0.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+                    ],
+                    "aliases": {
+                        "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "SimpleSoftwareIO\\QrCode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simple Software LLC",
+                    "email": "support@simplesoftware.io"
+                }
+            ],
+            "description": "Simple QrCode is a QR code generator made for Laravel.",
+            "homepage": "http://www.simplesoftware.io",
+            "keywords": [
+                "Simple",
+                "generator",
+                "laravel",
+                "qrcode",
+                "wrapper"
+            ],
+            "time": "2017-11-26T15:27:12+00:00"
+        },
+        {
+            "name": "swagger-api/swagger-ui",
+            "version": "v3.23.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swagger-api/swagger-ui.git",
+                "reference": "7b737f607fbd0db9f43671ce7ffc0dc7e7e75a4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/7b737f607fbd0db9f43671ce7ffc0dc7e7e75a4f",
+                "reference": "7b737f607fbd0db9f43671ce7ffc0dc7e7e75a4f",
                 "shasum": ""
             },
             "type": "library",
@@ -2204,7 +2304,7 @@
                 "swagger",
                 "ui"
             ],
-            "time": "2019-08-24T02:30:24+00:00"
+            "time": "2019-09-01T01:02:50+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5512,10 +5612,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "appointer/swaggervel": 20,
+        "infyomlabs/coreui-templates": 20,
         "infyomlabs/laravel-generator": 20,
-        "infyomlabs/adminlte-templates": 20,
-        "infyomlabs/swagger-generator": 20,
-        "appointer/swaggervel": 20
+        "infyomlabs/swagger-generator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

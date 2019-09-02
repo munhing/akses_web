@@ -7,8 +7,11 @@ use App\Http\Requests\UpdatePortuserRequest;
 use App\Repositories\PortuserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\Company;
 use Flash;
 use Response;
+use Str;
+use QRCode;
 
 class PortuserController extends AppBaseController
 {
@@ -42,7 +45,14 @@ class PortuserController extends AppBaseController
      */
     public function create()
     {
-        return view('portusers.create');
+        $uuid = Str::uuid();
+        // $companies = Company::all()->makeHidden(['deleted_at', 'created_at', 'updated_at'])->toArray();
+        $companies = Company::all()->pluck('name', 'id');
+
+        // dd($companies);
+
+        // return view('portusers.create', compact('uuid', 'companies'));
+        return view('portusers.create', compact('uuid', 'companies'));
     }
 
     /**

@@ -1,7 +1,7 @@
 <!-- Uuid Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('uuid', 'Uuid:') !!}
-    {!! Form::text('uuid', null, ['class' => 'form-control']) !!}
+    {!! Form::text('uuid', $uuid, ['class' => 'form-control', 'readonly']) !!}
 </div>
 
 <!-- Name Field -->
@@ -13,22 +13,33 @@
 <!-- Company Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('company_id', 'Company Id:') !!}
-    {!! Form::number('company_id', null, ['class' => 'form-control']) !!}
+
+    {!! Form::select('company_id', $companies, null, ['class' => 'form-control']) !!}
+
 </div>
 
 <!-- Expires On Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('expires_on', 'Expires On:') !!}
-    {!! Form::date('expires_on', null, ['class' => 'form-control','id'=>'expires_on']) !!}
+    {!! Form::text('expires_on', null, ['class' => 'form-control','id'=>'expires_on']) !!}
 </div>
 
 @section('scripts')
-    <script type="text/javascript">
-        $('#expires_on').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
+   <script>
+           $('#expires_on').datetimepicker({
+               format: 'YYYY-MM-DD HH:mm:ss',
+               useCurrent: true,
+               icons: {
+                   up: "icon-arrow-up-circle icons font-2xl",
+                   down: "icon-arrow-down-circle icons font-2xl"
+               },
+               sideBySide: true
+           });
+           $('#company_id').select2({
+                theme: 'bootstrap'
+            });
+        
+       </script>
 @endsection
 
 <!-- Submit Field -->

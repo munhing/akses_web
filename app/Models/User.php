@@ -8,7 +8,7 @@ use Eloquent as Model;
 /**
  * Class User
  * @package App\Models
- * @version August 31, 2019, 10:53 pm UTC
+ * @version August 31, 2019, 11:15 pm UTC
  *
  * @property string name
  * @property string email

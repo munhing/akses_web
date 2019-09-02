@@ -89,7 +89,8 @@ return [
     |
     */
 
-    'templates'         => 'adminlte-templates',
+    // 'templates'         => 'adminlte-templates',
+    'templates'         => 'coreui-templates',
 
     /*
     |--------------------------------------------------------------------------

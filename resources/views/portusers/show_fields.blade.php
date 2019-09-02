@@ -28,6 +28,12 @@
     <p>{!! $portuser->expires_on !!}</p>
 </div>
 
+<!-- Deleted At Field -->
+<div class="form-group">
+    {!! Form::label('deleted_at', 'Deleted At:') !!}
+    <p>{!! $portuser->deleted_at !!}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}
@@ -38,5 +44,13 @@
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $portuser->updated_at !!}</p>
+</div>
+
+<div class="form-group">
+    {!! Form::label('qrcode', 'QRCode:') !!}
+    @php
+        $qrcode = 'type=1&uuid='. $portuser->uuid
+    @endphp
+    {!! QrCode::size(250)->generate($qrcode) !!}
 </div>
 
