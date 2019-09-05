@@ -33,9 +33,10 @@ class PortuserController extends AppBaseController
     public function index(Request $request)
     {
         $portusers = $this->portuserRepository->all();
+        $companies = Company::all();
+        // dd($companies->id);
 
-        return view('portusers.index')
-            ->with('portusers', $portusers);
+        return view('portusers.index', compact('portusers', 'companies'));
     }
 
     /**
@@ -49,7 +50,7 @@ class PortuserController extends AppBaseController
         // $companies = Company::all()->makeHidden(['deleted_at', 'created_at', 'updated_at'])->toArray();
         $companies = Company::all()->pluck('name', 'id');
 
-        // dd($companies);
+        // dd($uuid);
 
         // return view('portusers.create', compact('uuid', 'companies'));
         return view('portusers.create', compact('uuid', 'companies'));
@@ -66,7 +67,13 @@ class PortuserController extends AppBaseController
     {
         $input = $request->all();
 
+        // dd($input['photo']);
+
         $portuser = $this->portuserRepository->create($input);
+
+        if (isset($input['photo'])) {
+            $portuser->addMediaFromRequest('photo')->toMediaCollection('photos');
+        }    
 
         Flash::success('Portuser saved successfully.');
 
@@ -93,6 +100,26 @@ class PortuserController extends AppBaseController
         return view('portusers.show')->with('portuser', $portuser);
     }
 
+     /**
+     * Display the specified Portuser.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function showQrcode($id)
+    {
+        $portuser = $this->portuserRepository->find($id);
+
+        if (empty($portuser)) {
+            Flash::error('Portuser not found');
+
+            return redirect(route('portusers.index'));
+        }
+
+        return view('portusers.show_qrcode')->with('portuser', $portuser);
+    }
+
     /**
      * Show the form for editing the specified Portuser.
      *
@@ -104,13 +131,15 @@ class PortuserController extends AppBaseController
     {
         $portuser = $this->portuserRepository->find($id);
 
+        $companies = Company::all()->pluck('name', 'id');
+
         if (empty($portuser)) {
             Flash::error('Portuser not found');
 
             return redirect(route('portusers.index'));
         }
 
-        return view('portusers.edit')->with('portuser', $portuser);
+        return view('portusers.edit', compact('portuser', 'companies'));
     }
 
     /**
@@ -131,8 +160,14 @@ class PortuserController extends AppBaseController
             return redirect(route('portusers.index'));
         }
 
-        $portuser = $this->portuserRepository->update($request->all(), $id);
+        $input = $request->all();
 
+        $portuser = $this->portuserRepository->update($input, $id);
+
+        if (isset($input['photo'])) {
+            $portuser->addMediaFromRequest('photo')->toMediaCollection('photos');
+        }   
+        
         Flash::success('Portuser updated successfully.');
 
         return redirect(route('portusers.index'));

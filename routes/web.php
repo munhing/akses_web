@@ -24,18 +24,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('portusers', 'PortuserController');
-
-Route::resource('roles', 'RoleController');
-
-Route::resource('companies', 'CompanyController');
-
-Route::resource('users', 'UserController');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
 Route::resource('users', 'UserController');
 
 Route::resource('companies', 'CompanyController');
@@ -43,3 +31,5 @@ Route::resource('companies', 'CompanyController');
 Route::resource('roles', 'RoleController');
 
 Route::resource('portusers', 'PortuserController');
+
+Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name('portusers.show_qrcode');

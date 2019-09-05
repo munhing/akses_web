@@ -22,7 +22,7 @@
                                 <strong>Create Portuser</strong>
                             </div>
                             <div class="card-body">
-                                {!! Form::open(['route' => 'portusers.store']) !!}
+                                {!! Form::open(['route' => 'portusers.store', 'enctype'=>'multipart/form-data']) !!}
 
                                    @include('portusers.fields')
 

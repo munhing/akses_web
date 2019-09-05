@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Eloquent as Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -15,9 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer company_id
  * @property string expires_on
  */
-class Portuser extends Model
+class Portuser extends Model implements HasMedia
 {
     use SoftDeletes;
+    use HasMediaTrait;
 
     public $table = 'portusers';
     

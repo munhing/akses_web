@@ -1,3 +1,4 @@
+<div class="col-md-6">
 <!-- Id Field -->
 <div class="form-group">
     {!! Form::label('id', 'Id:') !!}
@@ -45,12 +46,26 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $portuser->updated_at !!}</p>
 </div>
-
-<div class="form-group">
-    {!! Form::label('qrcode', 'QRCode:') !!}
-    @php
-        $qrcode = 'type=1&uuid='. $portuser->uuid
-    @endphp
-    {!! QrCode::size(250)->generate($qrcode) !!}
 </div>
 
+<div class="col-md-6">
+    <div class="form-group">
+        {!! Form::label('qrcode', 'QRCode:') !!}
+        @php
+            $qrcode = 'type=1&uuid='. $portuser->uuid
+        @endphp
+        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(250)->generate($qrcode)) !!} ">
+    </div>
+</div>
+
+@php
+    if (count($portuser->getMedia('photos')) > 0) {
+        $photo_url = $portuser->getMedia('photos')->first()->getUrl();
+    } else {
+        $photo_url = null;
+    }
+@endphp
+
+<div class="col-md-6">
+    <img src="{!! $photo_url !!}" >
+</div>

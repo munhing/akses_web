@@ -1,7 +1,15 @@
 <!-- Uuid Field -->
+
+@php
+    if(! isset($uuid)) {
+        $uuid = null;
+    }
+@endphp
+
 <div class="form-group col-sm-6">
     {!! Form::label('uuid', 'Uuid:') !!}
     {!! Form::text('uuid', $uuid, ['class' => 'form-control', 'readonly']) !!}
+
 </div>
 
 <!-- Name Field -->
@@ -24,10 +32,15 @@
     {!! Form::text('expires_on', null, ['class' => 'form-control','id'=>'expires_on']) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('photo', 'Profile Picture:') !!}
+
+    <input id="photo" type="file" class="form-control" name="photo">
+</div>
 @section('scripts')
    <script>
            $('#expires_on').datetimepicker({
-               format: 'YYYY-MM-DD HH:mm:ss',
+               format: 'YYYY-MM-DD',
                useCurrent: true,
                icons: {
                    up: "icon-arrow-up-circle icons font-2xl",
