@@ -60,7 +60,7 @@
 
 @php
     if (count($portuser->getMedia('photos')) > 0) {
-        $photo_url = $portuser->getMedia('photos')->first()->getUrl();
+        $photo_url = $portuser->getMedia('photos')->first()->getUrl('thumb');
     } else {
         $photo_url = null;
     }

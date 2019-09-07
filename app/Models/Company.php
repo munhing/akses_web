@@ -48,5 +48,9 @@ class Company extends Model
         'name' => 'required'
     ];
 
+    public function portusers()
+    {
+        return $this->hasMany('App\Models\Portuser');
+    }
     
 }

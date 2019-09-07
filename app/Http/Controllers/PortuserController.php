@@ -71,6 +71,8 @@ class PortuserController extends AppBaseController
 
         $portuser = $this->portuserRepository->create($input);
 
+        
+
         if (isset($input['photo'])) {
             $portuser->addMediaFromRequest('photo')->toMediaCollection('photos');
         }    
@@ -163,6 +165,8 @@ class PortuserController extends AppBaseController
         $input = $request->all();
 
         $portuser = $this->portuserRepository->update($input, $id);
+
+        // dd($input);
 
         if (isset($input['photo'])) {
             $portuser->addMediaFromRequest('photo')->toMediaCollection('photos');

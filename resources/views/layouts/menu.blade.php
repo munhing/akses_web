@@ -10,3 +10,6 @@
 <li class="nav-item {{ Request::is('portusers*') ? 'active' : '' }}">
     <a class="nav-link" href="{!! route('portusers.index') !!}"><i class="nav-icon icon-cursor"></i><span>Portusers</span></a>
 </li>
+<li class="nav-item {{ Request::is('portusersActive*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('portusersActive.index') !!}"><i class="nav-icon icon-cursor"></i><span>PortusersActive</span></a>
+</li>

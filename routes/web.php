@@ -19,11 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
 Route::resource('users', 'UserController');
 
 Route::resource('companies', 'CompanyController');
@@ -33,3 +28,7 @@ Route::resource('roles', 'RoleController');
 Route::resource('portusers', 'PortuserController');
 
 Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name('portusers.show_qrcode');
+
+Route::resource('monitors', 'MonitorController');
+
+Route::resource('portusersActive', 'PortuserActiveController');

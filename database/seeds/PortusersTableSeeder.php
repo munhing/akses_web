@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class PortusersTableSeeder extends Seeder
 {
@@ -11,6 +12,15 @@ class PortusersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Models\Portuser', 100)->create();
+        $portusers = factory('App\Models\Portuser', 500)->create();
+
+        $faker = Faker::create();
+        $imageUrl = $faker->imageUrl(640,480, null, false);
+
+        foreach($portusers as $portuser){
+            $portuser->addMediaFromUrl($imageUrl)->toMediaCollection('photos');
+        }
+
+
     }
 }

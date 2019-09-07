@@ -13,7 +13,7 @@ class CreatePortuserTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('portuser_transactions_', function (Blueprint $table) {
+        Schema::create('portuser_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('portuser_uuid');
             $table->integer('clock_type');
@@ -28,6 +28,6 @@ class CreatePortuserTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('portuser_transactions_');
+        Schema::dropIfExists('portuser_transactions');
     }
 }

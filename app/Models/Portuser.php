@@ -63,5 +63,18 @@ class Portuser extends Model implements HasMedia
         'expires_on' => 'required'
     ];
 
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaConversion('thumb')
+            ->width(250)
+            ->height(250)
+            ->sharpen(10);
+
+    }
     
 }
