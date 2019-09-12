@@ -12,10 +12,10 @@ class PortusersTableSeeder extends Seeder
      */
     public function run()
     {
-        $portusers = factory('App\Models\Portuser', 500)->create();
+        $portusers = factory('App\Models\Portuser', 150)->create();
 
         $faker = Faker::create();
-        $imageUrl = $faker->imageUrl(640,480, null, false);
+        $imageUrl = $faker->imageUrl(600,800, null, false);
 
         foreach($portusers as $portuser){
             $portuser->addMediaFromUrl($imageUrl)->toMediaCollection('photos');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\PortuserClockIn;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
 Route::resource('users', 'UserController');
 
 Route::resource('companies', 'CompanyController');
@@ -32,3 +35,8 @@ Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name
 Route::resource('monitors', 'MonitorController');
 
 Route::resource('portusersActive', 'PortuserActiveController');
+
+Route::get('/testevent', function() {
+    PortuserClockIn::dispatch();
+    return "Portuser clocks in!";
+});

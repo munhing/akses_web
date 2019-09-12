@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+
 class PortuserActiveController extends AppBaseController
 {
     /** @var  PortuserActiveRepository */

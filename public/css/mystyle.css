@@ -1,0 +1,11 @@
+.profile-card-header {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    /* height: 14rem; */
+    border-radius: .25rem .25rem 0 0;
+}

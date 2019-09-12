@@ -3,7 +3,7 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('portuserActives.index') !!}">Portuser Active</a>
+             <a href="{!! route('portusersActive.index') !!}">Portuser Active</a>
           </li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>

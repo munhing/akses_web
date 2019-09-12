@@ -79,10 +79,12 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content"  id='app'>
                 <div class="title m-b-md">
                     Laravel
                 </div>
+                
+                <example-component></example-component>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
@@ -91,9 +93,11 @@
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://github.com/laravel/laravel">GitHubsjdhfkjhs</a>
                 </div>
             </div>
         </div>
+
+        <script src="/js/app.js"></script>
     </body>
 </html>
