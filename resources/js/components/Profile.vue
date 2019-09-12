@@ -15,16 +15,34 @@
             </div>
 
         </div>
-    </div>    
+        <div>
+            <ul>
+                <li 
+                    v-for="portuser in portusers"
+                    v-bind:key="portuser.id"
+                    v-text="portuser.portuser_uuid"
+                ></li>
+            </ul>
+        </div>
+    </div>   
 </template>
 
 <script>
     export default {
 
+        data() {
+            return { portusers: [] };
+        },
+
         props: ['photo_url', 'name', 'company'],
 
         mounted() {
+            // fetch data from database
             console.log('Component mounted.')
+            axios.get('http://akses.test/api/portusersactive')
+                .then(response => {
+                    this.portusers = response.data
+                })
         }
     }
 </script>

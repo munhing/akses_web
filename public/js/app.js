@@ -1913,10 +1913,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      portusers: []
+    };
+  },
   props: ['photo_url', 'name', 'company'],
   mounted: function mounted() {
+    var _this = this;
+
+    // fetch data from database
     console.log('Component mounted.');
+    axios.get('http://akses.test/api/portusersactive').then(function (response) {
+      _this.portusers = response.data;
+    });
   }
 });
 
@@ -47528,6 +47548,19 @@ var render = function() {
           _vm._v(_vm._s(_vm.company))
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "ul",
+        _vm._l(_vm.portusers, function(portuser) {
+          return _c("li", {
+            key: portuser.id,
+            domProps: { textContent: _vm._s(portuser.portuser_uuid) }
+          })
+        }),
+        0
+      )
     ])
   ])
 }
