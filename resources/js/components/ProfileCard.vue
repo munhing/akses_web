@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-3 col-lg-2">
+    <div class="col-xs-4 col-sm-3 col-lg-2">
         <div class="brand-card">
             <div class="profile-card-header">
 
