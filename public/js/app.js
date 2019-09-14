@@ -1967,8 +1967,9 @@ __webpack_require__.r(__webpack_exports__);
 
     // fetch data from database
     console.log('Component mounted.');
-    axios.get('http://akses.test/api/portusersactive').then(function (response) {
-      _this.response = response.data; // console.log(response.data);
+    console.log(location.hostname);
+    axios.get('/api/portusersactive').then(function (response) {
+      _this.response = response.data;
     });
   }
 });

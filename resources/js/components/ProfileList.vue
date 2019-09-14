@@ -22,10 +22,10 @@
         mounted() {
             // fetch data from database
             console.log('Component mounted.')
-            axios.get('http://akses.test/api/portusersactive')
+            console.log(location.hostname);
+            axios.get('/api/portusersactive')
                 .then(response => {
                     this.response = response.data;
-                    // console.log(response.data);
                 })
         }
     }
