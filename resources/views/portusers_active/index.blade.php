@@ -6,11 +6,8 @@
     </ol>
     <div class="container-fluid" id="app">
         <div class="animated fadeIn">
-             @include('flash::message')
-             <div class="row">
-                @include('portusers_active.table2')
-
-             </div>
+            @include('flash::message')
+            @include('portusers_active.table2')
          </div>
     </div>
 @endsection

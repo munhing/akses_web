@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('portusersactive', function (Request $request) {
-    return PortuserActive::all();
+    return PortuserActive::with(['portuser', 'portuser.media', 'portuser.company'])->get();
 });
