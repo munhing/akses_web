@@ -21,3 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('portusersactive', function (Request $request) {
     return PortuserActive::with(['portuser', 'portuser.media', 'portuser.company'])->get();
 });
+
+Route::post('portusersactive', function (Request $request) {
+    // return $request['uuid'];
+    // $arr = explode('&', $request['qrcode']);
+    // return $arr;
+    $portuser = PortuserActive::where('portuser_uuid', '=', $request['uuid']);
+    $result = $portuser->delete();
+    return $result;
+    // return PortuserActive::with(['portuser', 'portuser.media', 'portuser.company'])->get();
+});

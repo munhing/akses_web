@@ -2092,18 +2092,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2112,7 +2100,8 @@ __webpack_require__.r(__webpack_exports__);
       profile: [],
       name: "",
       company: "",
-      photo_url: "/storage/0/conversions/default-thumb.jpg"
+      photo_url: "/storage/0/conversions/default-thumb.jpg",
+      qrcode: ''
     };
   },
   methods: {
@@ -2135,16 +2124,38 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(this.profile.portuser.media[0].url_thumb);
       return this.profile.portuser.media[0].url_thumb;
+    },
+    clockOut: function clockOut() {
+      this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid; // send a post request to clock out
+
+      axios.post('/api/portusersactive', {
+        uuid: this.profile.portuser.uuid
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      }); // get call to get the latest listing
+
+      console.log(this.profile.portuser.uuid);
+      this.fromChild = false;
+      this.reloadList();
+    },
+    reloadList: function reloadList() {
+      var _this = this;
+
+      axios.get('/api/portusersactive').then(function (response) {
+        _this.response = response.data;
+      });
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     // fetch data from database
     console.log('Component mounted.');
     console.log(location.hostname);
     axios.get('/api/portusersactive').then(function (response) {
-      _this.response = response.data;
+      _this2.response = response.data;
     });
   }
 });
@@ -76820,7 +76831,13 @@ var render = function() {
       _c(
         "b-modal",
         {
-          attrs: { title: "Modal title" },
+          attrs: {
+            title: "Modal title",
+            centered: "",
+            size: "sm",
+            "hide-header": "",
+            "hide-footer": ""
+          },
           on: {
             ok: function($event) {
               _vm.fromChild = false
@@ -76835,33 +76852,32 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "brand-card" }, [
-            _c("div", { staticClass: "profile-card-header" }, [
-              _c("div", { staticClass: "chart-wrapper" }, [
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: { src: _vm.photo_url }
-                })
-              ])
+          _c("div", { staticClass: "d-block text-center" }, [
+            _c("img", {
+              staticClass: "img-fluid",
+              attrs: { src: _vm.photo_url }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "mt-3 text-value" }, [
+              _vm._v(_vm._s(_vm.name))
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "brand-card-body" }, [
-              _c("div", [
-                _c("div", { staticClass: "text-value" }, [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(_vm.name) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-uppercase text-muted small" }, [
-                  _vm._v(_vm._s(_vm.company))
-                ])
-              ])
+            _c("div", { staticClass: "text-uppercase text-muted small" }, [
+              _vm._v(_vm._s(_vm.company))
             ])
-          ])
-        ]
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-button",
+            {
+              staticClass: "mt-3",
+              attrs: { size: "lg", block: "", variant: "success" },
+              on: { click: _vm.clockOut }
+            },
+            [_vm._v("Clock Out")]
+          )
+        ],
+        1
       )
     ],
     2

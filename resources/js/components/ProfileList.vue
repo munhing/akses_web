@@ -8,25 +8,13 @@
             :company="pl.portuser.company.name"
             @profileClicked="onProfileClick"
         ></profile-card>
-        <b-modal title="Modal title" v-model="fromChild" @ok="fromChild = false">
-            <div class="brand-card">
-                <div class="profile-card-header">
-
-                    <div class="chart-wrapper">
-                        <img :src="photo_url" class="img-fluid">
-                    </div>
-
-                </div>
-                <div class="brand-card-body">
-                    <div>
-                        <div class="text-value">
-                                {{ name }}
-                        </div>
-                        <div class="text-uppercase text-muted small">{{ company }}</div>
-                    </div>
-
-                </div>
-            </div>             
+        <b-modal title="Modal title" v-model="fromChild" @ok="fromChild = false" centered size="sm" hide-header hide-footer>
+            <div class="d-block text-center">
+                <img :src="photo_url" class="img-fluid">
+                <div class="mt-3 text-value">{{ name }}</div>
+                <div class="text-uppercase text-muted small">{{ company }}</div>
+            </div>
+            <b-button class="mt-3" size="lg" block variant="danger" @click="clockOut">Clock Out</b-button>          
         </b-modal>
     </div>
 </template>
@@ -41,7 +29,8 @@
                 profile: [],
                 name: "",
                 company: "",
-                photo_url: "/storage/0/conversions/default-thumb.jpg"
+                photo_url: "/storage/0/conversions/default-thumb.jpg",
+                qrcode: ''
             }; 
         },
 
@@ -68,6 +57,35 @@
 
                 console.log(this.profile.portuser.media[0].url_thumb);
                 return this.profile.portuser.media[0].url_thumb;
+            },
+
+            clockOut() {
+                this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid;
+                // send a post request to clock out
+                axios.post('/api/portusersactive', {
+                    uuid: this.profile.portuser.uuid
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                // get call to get the latest listing
+
+                console.log(this.profile.portuser.uuid);
+
+                this.fromChild = false;
+
+                this.reloadList();
+            },
+
+            reloadList() {
+                axios.get('/api/portusersactive')
+                    .then(response => {
+                        this.response = response.data;
+                    })               
             }
 
         },
