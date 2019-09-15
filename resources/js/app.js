@@ -8,6 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import BootstrapVue from 'bootstrap-vue' //Importing
+
+Vue.use(BootstrapVue) // Telling Vue to use this in whole application
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,6 +26,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('profile-list', require('./components/ProfileList.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
+Vue.component('modal-component', require('./components/Modals.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

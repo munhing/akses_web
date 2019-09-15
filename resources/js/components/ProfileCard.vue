@@ -10,7 +10,11 @@
             </div>
             <div class="brand-card-body">
                 <div>
-                    <div class="text-value">{{ name }}</div>
+                    <div class="text-value">
+                        <a href="#" @click="emit">
+                            {{ name }}
+                        </a>
+                    </div>
                     <div class="text-uppercase text-muted small">{{ company }}</div>
                 </div>
 
@@ -23,6 +27,12 @@
     export default {
 
         props: ['media', 'name', 'company'],
+
+        methods: {
+            emit(event) {
+                this.$emit('profileClicked', this.$vnode.key);
+            }
+        },
 
         computed: {
             getPhotoUrl() {
