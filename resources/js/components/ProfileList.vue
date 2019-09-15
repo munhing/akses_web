@@ -1,8 +1,8 @@
 <template>
     <div class="row"> 
         <profile-card 
-            v-for="(pl, index) in response"
-            :key="index"
+            v-for="pl in getProfiles"
+            :key="pl.portuser.id"
             :media="pl.portuser.media"               
             :name="pl.portuser.name"               
             :company="pl.portuser.company.name"
@@ -34,12 +34,18 @@
             }; 
         },
 
+        computed: {
+            getProfiles() {
+                return this.response;
+            } 
+        },
+
         methods: {
             onProfileClick(value) {
                 this.fromChild = true;
-                this.profile = this.response[value];
+                this.profile = this.getProfile(value);
                 console.log('Profile ' + value +' was clicked!');
-                console.log(this.response[value]);
+                console.log(this.profile);
 
                 this.name = this.profile.portuser.name;
                 this.company = this.profile.portuser.company.name;
@@ -86,6 +92,20 @@
                     .then(response => {
                         this.response = response.data;
                     })               
+            },
+
+            getProfile(id) {
+
+                let profile;
+
+                this.response.forEach(function(item){
+                    if (id == item.portuser.id) {
+                        profile = item;
+                    }
+                });
+
+                return profile;
+
             }
 
         },

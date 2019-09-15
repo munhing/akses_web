@@ -2104,12 +2104,17 @@ __webpack_require__.r(__webpack_exports__);
       qrcode: ''
     };
   },
+  computed: {
+    getProfiles: function getProfiles() {
+      return this.response;
+    }
+  },
   methods: {
     onProfileClick: function onProfileClick(value) {
       this.fromChild = true;
-      this.profile = this.response[value];
+      this.profile = this.getProfile(value);
       console.log('Profile ' + value + ' was clicked!');
-      console.log(this.response[value]);
+      console.log(this.profile);
       this.name = this.profile.portuser.name;
       this.company = this.profile.portuser.company.name;
       this.photo_url = this.getPhotoUrl();
@@ -2146,6 +2151,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/portusersactive').then(function (response) {
         _this.response = response.data;
       });
+    },
+    getProfile: function getProfile(id) {
+      var profile;
+      this.response.forEach(function (item) {
+        if (id == item.portuser.id) {
+          profile = item;
+        }
+      });
+      return profile;
     }
   },
   mounted: function mounted() {
@@ -76816,9 +76830,9 @@ var render = function() {
     "div",
     { staticClass: "row" },
     [
-      _vm._l(_vm.response, function(pl, index) {
+      _vm._l(_vm.getProfiles, function(pl) {
         return _c("profile-card", {
-          key: index,
+          key: pl.portuser.id,
           attrs: {
             media: pl.portuser.media,
             name: pl.portuser.name,
@@ -76871,7 +76885,7 @@ var render = function() {
             "b-button",
             {
               staticClass: "mt-3",
-              attrs: { size: "lg", block: "", variant: "success" },
+              attrs: { size: "lg", block: "", variant: "danger" },
               on: { click: _vm.clockOut }
             },
             [_vm._v("Clock Out")]
