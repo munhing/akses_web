@@ -2131,25 +2131,30 @@ __webpack_require__.r(__webpack_exports__);
       return this.profile.portuser.media[0].url_thumb;
     },
     clockOut: function clockOut() {
+      var _this = this;
+
       this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid; // send a post request to clock out
 
+      var id = this.profile.portuser.id;
       axios.post('/api/portusersactive', {
         uuid: this.profile.portuser.uuid
       }).then(function (response) {
         console.log(response);
+
+        _this.removeProfile(id);
       })["catch"](function (error) {
         console.log(error);
-      }); // get call to get the latest listing
+      }); // this.removeProfile(id);
+      // get call to get the latest listing
 
       console.log(this.profile.portuser.uuid);
-      this.fromChild = false;
-      this.reloadList();
+      this.fromChild = false; // this.reloadList();
     },
     reloadList: function reloadList() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/portusersactive').then(function (response) {
-        _this.response = response.data;
+        _this2.response = response.data;
       });
     },
     getProfile: function getProfile(id) {
@@ -2160,16 +2165,29 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       return profile;
+    },
+    removeProfile: function removeProfile(id) {
+      var i;
+      var index;
+
+      for (i = 0; i < this.response.length; i++) {
+        if (id == this.response[i].portuser.id) {
+          index = i;
+        }
+      }
+
+      console.log('index is ' + index);
+      this.$delete(this.response, index);
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     // fetch data from database
     console.log('Component mounted.');
     console.log(location.hostname);
     axios.get('/api/portusersactive').then(function (response) {
-      _this2.response = response.data;
+      _this3.response = response.data;
     });
   }
 });

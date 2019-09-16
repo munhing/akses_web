@@ -9,6 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(PortuserActive::class, function (Faker $faker) {
 
     return [
-        'portuser_uuid' => Portuser::all()->random()->uuid
+        // 'portuser_uuid' => Portuser::all()->random()->uuid
+        'portuser_uuid' => Portuser::inRandomOrder()->take(1)->first()->uuid
     ];
 });

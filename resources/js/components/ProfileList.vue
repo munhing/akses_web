@@ -44,6 +44,7 @@
             onProfileClick(value) {
                 this.fromChild = true;
                 this.profile = this.getProfile(value);
+                
                 console.log('Profile ' + value +' was clicked!');
                 console.log(this.profile);
 
@@ -68,30 +69,35 @@
             clockOut() {
                 this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid;
                 // send a post request to clock out
+                let id = this.profile.portuser.id;
                 axios.post('/api/portusersactive', {
                     uuid: this.profile.portuser.uuid
                 })
-                .then(function (response) {
+                .then((response) => {
                     console.log(response);
+                    this.removeProfile(id);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-
+                // this.removeProfile(id);
                 // get call to get the latest listing
 
                 console.log(this.profile.portuser.uuid);
 
                 this.fromChild = false;
 
-                this.reloadList();
+                // this.reloadList();
             },
 
             reloadList() {
+
+
                 axios.get('/api/portusersactive')
                     .then(response => {
                         this.response = response.data;
-                    })               
+                    });
+
             },
 
             getProfile(id) {
@@ -105,6 +111,22 @@
                 });
 
                 return profile;
+
+            },
+
+            removeProfile(id) {
+
+                let i;
+                let index;
+
+                for (i=0; i < this.response.length; i++) {
+                    if (id == this.response[i].portuser.id) {
+                        index = i;
+                    }
+                }
+
+                console.log('index is ' + index);
+                this.$delete(this.response, index);
 
             }
 
