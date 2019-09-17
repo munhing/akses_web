@@ -135,11 +135,17 @@
         mounted() {
             // fetch data from database
             console.log('Component mounted.')
-            console.log(location.hostname);
+            console.log(window.location.hostname);
             axios.get('/api/portusersactive')
                 .then(response => {
                     this.response = response.data;
-                })
+                });
+
+            window.Echo.channel('clocking').listen('ClockOut', e => {
+                console.log('Portuser has clock out!')
+                console.log(e);
+            });
+
         }
     }
 </script>

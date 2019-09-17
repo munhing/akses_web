@@ -2185,9 +2185,13 @@ __webpack_require__.r(__webpack_exports__);
 
     // fetch data from database
     console.log('Component mounted.');
-    console.log(location.hostname);
+    console.log(window.location.hostname);
     axios.get('/api/portusersactive').then(function (response) {
       _this3.response = response.data;
+    });
+    window.Echo.channel('clocking').listen('ClockOut', function (e) {
+      console.log('Portuser has clock out!');
+      console.log(e);
     });
   }
 });
@@ -89152,10 +89156,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   wsHost: 'llpm.dlinkddns.com',
   wsPort: 6001,
   disableStats: true
-});
-window.Echo.channel('clocking').listen('PortuserClockIn', function (e) {
-  console.log('Portuser clocks in!');
-  console.log(e);
 });
 
 /***/ }),

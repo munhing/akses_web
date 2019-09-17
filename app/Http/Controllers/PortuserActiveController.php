@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Events\PortuserClockIn;
 
 
 class PortuserActiveController extends AppBaseController
@@ -53,16 +54,23 @@ class PortuserActiveController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreatePortuserActiveRequest $request)
+    // public function store(CreatePortuserActiveRequest $request)
+    // {
+    //     $input = $request->all();
+
+    //     $portuserActive = $this->portuserActiveRepository->create($input);
+
+    //     Flash::success('Portuser Active saved successfully.');
+
+    //     return redirect(route('portusersActive.index'));
+    // }
+
+    public function store(Request $request)
     {
         $input = $request->all();
-
-        $portuserActive = $this->portuserActiveRepository->create($input);
-
-        Flash::success('Portuser Active saved successfully.');
-
-        return redirect(route('portusersActive.index'));
-    }
+        PortuserClockIn::dispatch();
+        return $input;
+    }        
 
     /**
      * Display the specified PortuserActive.

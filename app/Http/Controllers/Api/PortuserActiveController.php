@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\PortuserActiveRepository;
+use App\Events\ClockOut;
+use App\Events\PortuserClockIn;
+use App\Models\PortuserActive;
 
 class PortuserActiveController extends Controller
 {
@@ -22,7 +25,8 @@ class PortuserActiveController extends Controller
      */
     public function index()
     {
-        return $this->portuserActiveRepository->all();
+        PortuserClockIn::dispatch();
+        return PortuserActive::with(['portuser', 'portuser.media', 'portuser.company'])->get();
     }
 
     /**
@@ -33,7 +37,7 @@ class PortuserActiveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return PortuserClockIn::dispatch();
     }
 
     /**

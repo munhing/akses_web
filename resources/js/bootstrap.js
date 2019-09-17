@@ -40,8 +40,3 @@ window.Echo = new Echo({
     wsPort: 6001,
     disableStats: true    
 });
-
-window.Echo.channel('clocking').listen('PortuserClockIn', e => {
-    console.log('Portuser clocks in!');
-    console.log(e);
-});
