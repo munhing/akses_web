@@ -62,7 +62,7 @@
                     return "/storage/0/conversions/default-thumb.jpg";
                 }
 
-                console.log(this.profile.portuser.media[0].url_thumb);
+                // console.log(this.profile.portuser.media[0].url_thumb);
                 return this.profile.portuser.media[0].url_thumb;
             },
 
