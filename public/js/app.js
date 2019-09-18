@@ -2049,9 +2049,9 @@ __webpack_require__.r(__webpack_exports__);
         // array does not exist, is not an array, or is empty
         // return default value;
         return "/storage/0/conversions/default-thumb.jpg";
-      }
+      } // console.log(this.media[0].url_thumb);
 
-      console.log(this.media[0].url_thumb);
+
       return this.media[0].url_thumb;
     }
   },
@@ -2125,9 +2125,9 @@ __webpack_require__.r(__webpack_exports__);
         // array does not exist, is not an array, or is empty
         // return default value;
         return "/storage/0/conversions/default-thumb.jpg";
-      }
+      } // console.log(this.profile.portuser.media[0].url_thumb);
 
-      console.log(this.profile.portuser.media[0].url_thumb);
+
       return this.profile.portuser.media[0].url_thumb;
     },
     clockOut: function clockOut() {
