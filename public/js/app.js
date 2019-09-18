@@ -2178,6 +2178,15 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log('index is ' + index);
       this.$delete(this.response, index);
+    },
+    makeToast: function makeToast() {
+      var append = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      // this method not working
+      this.$bvToast.toast("Portuser clocks out!", {
+        title: 'Clocking',
+        autoHideDelay: 5000,
+        appendToast: append
+      });
     }
   },
   mounted: function mounted() {
@@ -2190,6 +2199,10 @@ __webpack_require__.r(__webpack_exports__);
       _this3.response = response.data;
     });
     window.Echo.channel('clocking').listen('ClockOut', function (e) {
+      // this.response = [];
+      // this.makeToast(); // Not working
+      _this3.reloadList();
+
       console.log('Portuser has clock out!');
       console.log(e);
     });

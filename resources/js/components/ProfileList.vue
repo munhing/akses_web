@@ -128,8 +128,16 @@
                 console.log('index is ' + index);
                 this.$delete(this.response, index);
 
-            }
+            },
 
+            makeToast(append = false) {
+                // this method not working
+                this.$bvToast.toast(`Portuser clocks out!`, {
+                title: 'Clocking',
+                autoHideDelay: 5000,
+                appendToast: append
+                })
+            }
         },
 
         mounted() {
@@ -142,6 +150,10 @@
                 });
 
             window.Echo.channel('clocking').listen('ClockOut', e => {
+
+                // this.response = [];
+                // this.makeToast(); // Not working
+                this.reloadList();
                 console.log('Portuser has clock out!')
                 console.log(e);
             });
