@@ -42,7 +42,7 @@
                     return "/storage/0/conversions/default-thumb.jpg";
                 }
 
-                console.log(this.media[0].url_thumb);
+                // console.log(this.media[0].url_thumb);
                 return this.media[0].url_thumb;
             }
         },
