@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('portusersactive', 'PortuserActiveController');
+// Route::get('portusersactive', 'PortuserActiveController@index');
