@@ -21,5 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('portusersactive', 'PortuserActiveController');
-// Route::get('portusersactive', 'PortuserActiveController@index');
+// Route::apiResource('portusersactive', 'PortuserActiveController');
+Route::get('portusersactive', 'PortuserActiveController@index');
+Route::post('portusersactive', 'PortuserActiveController@clockIn');
+Route::delete('portusersactive', 'PortuserActiveController@clockOut');

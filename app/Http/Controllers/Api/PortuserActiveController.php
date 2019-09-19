@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\PortuserActiveRepository;
 use App\Events\ClockOut;
+use App\Events\ClockIn;
 use App\Events\PortuserClockIn;
 use App\Models\Portuser;
 use App\Models\PortuserActive;
@@ -36,16 +37,23 @@ class PortuserActiveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function clockIn(Request $request)
     {
         $portuser = Portuser::where('uuid', '=', $request['uuid'])->get();
-        $clockingOut = PortuserActive::where('portuser_uuid', '=', $request['uuid'])->delete();
-        
-        if($clockingOut) {
-            ClockOut::dispatch($portuser);
+
+        if(count($portuser) == 0) {
+            return null;
         }
 
-        return $clockingOut;
+        $clockingIn = new PortuserActive;
+        $clockingIn->portuser_uuid = $request['uuid'];
+        $clockingIn->save();
+        
+        if($clockingIn) {
+            ClockIn::dispatch($portuser);
+        }
+
+        return $clockingIn;
     }
 
     /**
@@ -74,11 +82,20 @@ class PortuserActiveController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function clockOut(Request $request)
     {
-        //
+        // return $request;
+        $portuser = Portuser::where('uuid', '=', $request['uuid'])->get();
+        // return $portuser;
+        $clockingOut = PortuserActive::where('portuser_uuid', '=', $request['uuid'])->delete();
+        
+        if($clockingOut) {
+            ClockOut::dispatch($portuser);
+        }
+
+        return $clockingOut;
     }
 }

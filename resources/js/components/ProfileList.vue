@@ -24,7 +24,6 @@
 
         data() {
             return {
-                response: [],
                 fromChild: false,
                 profile: [],
                 name: "",
@@ -36,7 +35,7 @@
 
         computed: {
             getProfiles() {
-                return this.response;
+                return this.$root.profiles;
             } 
         },
 
@@ -70,8 +69,10 @@
                 this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid;
                 // send a post request to clock out
                 let id = this.profile.portuser.id;
-                axios.post('/api/portusersactive', {
-                    uuid: this.profile.portuser.uuid
+
+                console.log('uuid is: ' + this.profile.portuser.uuid);
+                axios.delete('/api/portusersactive', {
+                    data: {uuid: this.profile.portuser.uuid}
                 })
                 .then((response) => {
                     console.log(response);
@@ -90,21 +91,11 @@
                 // this.reloadList();
             },
 
-            reloadList() {
-
-
-                axios.get('/api/portusersactive')
-                    .then(response => {
-                        this.response = response.data;
-                    });
-
-            },
-
             getProfile(id) {
 
                 let profile;
 
-                this.response.forEach(function(item){
+                this.$root.profiles.forEach(function(item){
                     if (id == item.portuser.id) {
                         profile = item;
                     }
@@ -119,14 +110,14 @@
                 let i;
                 let index;
 
-                for (i=0; i < this.response.length; i++) {
-                    if (id == this.response[i].portuser.id) {
+                for (i=0; i < this.$root.profiles.length; i++) {
+                    if (id == this.$root.profiles[i].portuser.id) {
                         index = i;
                     }
                 }
 
                 console.log('index is ' + index);
-                this.$delete(this.response, index);
+                this.$delete(this.$root.profiles, index);
 
             },
 
@@ -146,18 +137,26 @@
             console.log(window.location.hostname);
             axios.get('/api/portusersactive')
                 .then(response => {
-                    this.response = response.data;
+                    this.$root.profiles = response.data;
                 });
 
             window.Echo.channel('clocking').listen('ClockOut', e => {
 
-                // this.response = [];
+                // this.$root.profiles = [];
                 // this.makeToast(); // Not working
-                this.reloadList();
+                this.$root.reloadList();
                 console.log('Portuser has clock out!')
                 console.log(e);
             });
 
+            window.Echo.channel('clocking').listen('ClockIn', e => {
+
+                // this.$root.profiles = [];
+                // this.makeToast(); // Not working
+                this.$root.reloadList();
+                console.log('Portuser has clock In!')
+                console.log(e);
+            });
         }
     }
 </script>

@@ -1887,8 +1887,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     clockIn: function clockIn(e) {
-      e.preventDefault();
+      var _this = this;
+
+      e.preventDefault(); // make an ajax call to clock in a port user
+      // send a post request to clock In
+
+      axios.post('/api/portusersactive', {
+        uuid: this.form.uuid
+      }).then(function (response) {
+        console.log(response);
+
+        _this.$root.reloadList();
+      })["catch"](function (error) {
+        console.log(error);
+      }); // this.removeProfile(id);
+      // get call to get the latest listing
+
       console.log('Portuser with uuid: ' + this.form.uuid + ' clock in!');
+      this.isVisible = false;
     }
   }
 });
@@ -1988,7 +2004,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      response: [],
       fromChild: false,
       profile: [],
       name: "",
@@ -1999,7 +2014,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getProfiles: function getProfiles() {
-      return this.response;
+      return this.$root.profiles;
     }
   },
   methods: {
@@ -2029,8 +2044,11 @@ __webpack_require__.r(__webpack_exports__);
       this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid; // send a post request to clock out
 
       var id = this.profile.portuser.id;
-      axios.post('/api/portusersactive', {
-        uuid: this.profile.portuser.uuid
+      console.log('uuid is: ' + this.profile.portuser.uuid);
+      axios["delete"]('/api/portusersactive', {
+        data: {
+          uuid: this.profile.portuser.uuid
+        }
       }).then(function (response) {
         console.log(response);
 
@@ -2043,16 +2061,9 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.profile.portuser.uuid);
       this.fromChild = false; // this.reloadList();
     },
-    reloadList: function reloadList() {
-      var _this2 = this;
-
-      axios.get('/api/portusersactive').then(function (response) {
-        _this2.response = response.data;
-      });
-    },
     getProfile: function getProfile(id) {
       var profile;
-      this.response.forEach(function (item) {
+      this.$root.profiles.forEach(function (item) {
         if (id == item.portuser.id) {
           profile = item;
         }
@@ -2063,14 +2074,14 @@ __webpack_require__.r(__webpack_exports__);
       var i;
       var index;
 
-      for (i = 0; i < this.response.length; i++) {
-        if (id == this.response[i].portuser.id) {
+      for (i = 0; i < this.$root.profiles.length; i++) {
+        if (id == this.$root.profiles[i].portuser.id) {
           index = i;
         }
       }
 
       console.log('index is ' + index);
-      this.$delete(this.response, index);
+      this.$delete(this.$root.profiles, index);
     },
     makeToast: function makeToast() {
       var append = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
@@ -2083,20 +2094,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this2 = this;
 
     // fetch data from database
     console.log('Component mounted.');
     console.log(window.location.hostname);
     axios.get('/api/portusersactive').then(function (response) {
-      _this3.response = response.data;
+      _this2.$root.profiles = response.data;
     });
     window.Echo.channel('clocking').listen('ClockOut', function (e) {
-      // this.response = [];
+      // this.$root.profiles = [];
       // this.makeToast(); // Not working
-      _this3.reloadList();
+      _this2.$root.reloadList();
 
       console.log('Portuser has clock out!');
+      console.log(e);
+    });
+    window.Echo.channel('clocking').listen('ClockIn', function (e) {
+      // this.$root.profiles = [];
+      // this.makeToast(); // Not working
+      _this2.$root.reloadList();
+
+      console.log('Portuser has clock In!');
       console.log(e);
     });
   }
@@ -88684,13 +88703,26 @@ Vue.component('clock-in-modal', __webpack_require__(/*! ./components/ClockInModa
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+// let store = {
+//     profiles: []
+// };
 
 var app = new Vue({
   el: '#app',
+  data: {
+    profiles: []
+  },
   methods: {
     clockInModal: function clockInModal() {
       console.log('Clock In button was pressed!');
       this.$refs.myModal.isVisible = true;
+    },
+    reloadList: function reloadList() {
+      var _this = this;
+
+      axios.get('/api/portusersactive').then(function (response) {
+        _this.profiles = response.data;
+      });
     }
   }
 });

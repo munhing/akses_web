@@ -33,13 +33,32 @@ Vue.component('clock-in-modal', require('./components/ClockInModal.vue').default
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// let store = {
+//     profiles: []
+// };
+
+
 const app = new Vue({
     el: '#app',
 
+    data: {
+        profiles: []
+    },
+
     methods: {
+        
         clockInModal() {
             console.log('Clock In button was pressed!');
             this.$refs.myModal.isVisible = true;
-        }
+        },
+
+        reloadList() {
+
+            axios.get('/api/portusersactive')
+                .then(response => {
+                    this.profiles = response.data;
+                });
+
+        },        
     }
 });

@@ -29,8 +29,25 @@
         methods: {
             clockIn(e) {
                 e.preventDefault();
-                console.log('Portuser with uuid: '+ this.form.uuid +' clock in!');
                 // make an ajax call to clock in a port user
+
+                // send a post request to clock In
+                axios.post('/api/portusersactive', {
+                    uuid: this.form.uuid
+                })
+                .then((response) => {
+                    console.log(response);
+                    this.$root.reloadList();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                // this.removeProfile(id);
+                // get call to get the latest listing
+
+                console.log('Portuser with uuid: '+ this.form.uuid +' clock in!');
+
+                this.isVisible = false;                
             }
         }
     }
