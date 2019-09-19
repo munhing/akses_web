@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Portuser Actives</li>
-    </ol>
-    <div class="container-fluid" id="app">
-        <div class="animated fadeIn">
-            @include('flash::message')
-            @include('portusers_active.table2')
-         </div>
+    <div id="app">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Portuser Actives</li>
+            <li class="breadcrumb-menu d-md-down-none">
+                <div class="btn-group" role="group" aria-label="Button group">
+                <a class="btn" href="#" @click.prevent="clockInModal">
+                    <i class="fa fa-sign-out"></i> Clock In</a>
+                </div>
+            </li>        
+        </ol>
+        <div class="container-fluid">
+            <div class="animated fadeIn">
+                @include('flash::message')
+                <profile-list></profile-list>
+                <clock-in-modal ref="myModal"></clock-in-modal>
+            </div>
+        </div>
     </div>
 @endsection
 

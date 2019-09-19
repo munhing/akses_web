@@ -23,10 +23,9 @@ Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('profile-list', require('./components/ProfileList.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
-Vue.component('modal-component', require('./components/Modals.vue').default);
+Vue.component('clock-in-modal', require('./components/ClockInModal.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,4 +35,11 @@ Vue.component('modal-component', require('./components/Modals.vue').default);
 
 const app = new Vue({
     el: '#app',
+
+    methods: {
+        clockInModal() {
+            console.log('Clock In button was pressed!');
+            this.$refs.myModal.isVisible = true;
+        }
+    }
 });

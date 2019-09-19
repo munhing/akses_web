@@ -35,8 +35,3 @@ Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name
 Route::resource('monitors', 'MonitorController');
 
 Route::resource('portusersActive', 'PortuserActiveController');
-
-Route::post('/testevent', function() {
-    PortuserClockIn::dispatch();
-    return "Portuser clocks in!";
-});

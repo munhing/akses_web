@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\PortuserActiveRepository;
 use App\Events\ClockOut;
 use App\Events\PortuserClockIn;
+use App\Models\Portuser;
 use App\Models\PortuserActive;
 
 class PortuserActiveController extends Controller
@@ -25,8 +26,8 @@ class PortuserActiveController extends Controller
      */
     public function index()
     {
-        PortuserClockIn::dispatch();
-        return PortuserActive::with(['portuser', 'portuser.media', 'portuser.company'])->get();
+        // get active portusers order by latest clock in
+        return PortuserActive::with(['portuser', 'portuser.media', 'portuser.company'])->orderByDesc('id')->get();
     }
 
     /**
@@ -37,7 +38,14 @@ class PortuserActiveController extends Controller
      */
     public function store(Request $request)
     {
-        // return PortuserClockIn::dispatch();
+        $portuser = Portuser::where('uuid', '=', $request['uuid'])->get();
+        $clockingOut = PortuserActive::where('portuser_uuid', '=', $request['uuid'])->delete();
+        
+        if($clockingOut) {
+            ClockOut::dispatch($portuser);
+        }
+
+        return $clockingOut;
     }
 
     /**
