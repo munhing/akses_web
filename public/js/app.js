@@ -88718,7 +88718,7 @@ var app = new Vue({
       var _this = this;
 
       return this.profiles.filter(function (profile) {
-        return profile.portuser.name.toLowerCase().indexOf(_this.search.toLowerCase()) !== -1;
+        return profile.portuser.name.toLowerCase().indexOf(_this.search.toLowerCase()) !== -1 || profile.portuser.company.name.toLowerCase().indexOf(_this.search.toLowerCase()) !== -1;
       });
     }
   },

@@ -49,7 +49,7 @@ const app = new Vue({
     computed: {
         filteredProfiles() {
             return this.profiles.filter(profile => {
-                return profile.portuser.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
+                return (profile.portuser.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (profile.portuser.company.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
             });
         }
     },
