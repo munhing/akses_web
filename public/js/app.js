@@ -2014,7 +2014,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getProfiles: function getProfiles() {
-      return this.$root.profiles;
+      return this.$root.filteredProfiles;
     }
   },
   methods: {
@@ -88710,7 +88710,17 @@ Vue.component('clock-in-modal', __webpack_require__(/*! ./components/ClockInModa
 var app = new Vue({
   el: '#app',
   data: {
-    profiles: []
+    profiles: [],
+    search: ''
+  },
+  computed: {
+    filteredProfiles: function filteredProfiles() {
+      var _this = this;
+
+      return this.profiles.filter(function (profile) {
+        return profile.portuser.name.toLowerCase().indexOf(_this.search.toLowerCase()) !== -1;
+      });
+    }
   },
   methods: {
     clockInModal: function clockInModal() {
@@ -88718,10 +88728,10 @@ var app = new Vue({
       this.$refs.myModal.isVisible = true;
     },
     reloadList: function reloadList() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/portusersactive').then(function (response) {
-        _this.profiles = response.data;
+        _this2.profiles = response.data;
       });
     }
   }

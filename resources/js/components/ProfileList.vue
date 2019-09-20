@@ -35,7 +35,7 @@
 
         computed: {
             getProfiles() {
-                return this.$root.profiles;
+                return this.$root.filteredProfiles;
             } 
         },
 

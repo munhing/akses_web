@@ -42,7 +42,16 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        profiles: []
+        profiles: [],
+        search: ''
+    },
+
+    computed: {
+        filteredProfiles() {
+            return this.profiles.filter(profile => {
+                return profile.portuser.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
+            });
+        }
     },
 
     methods: {
