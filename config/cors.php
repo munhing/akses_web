@@ -21,6 +21,7 @@ return [
 
         'allow_origins' => [
             '*',
+            env('CORS_ALLOW_ORIGIN', '*'),
         ],
 
         'allow_methods' => [
@@ -37,6 +38,7 @@ return [
             'X-Auth-Token',
             'Origin',
             'Authorization',
+            'X-Requested-With',
         ],
 
         'expose_headers' => [
