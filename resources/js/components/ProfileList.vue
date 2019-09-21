@@ -135,7 +135,7 @@
             // fetch data from database
             console.log('Component mounted.')
             console.log(window.location.hostname);
-            axios.get('/api/portusersactive')
+            axios.get('http://llpm.dlinkddns.com:8084/api/portusersactive')
                 .then(response => {
                     this.$root.profiles = response.data;
                 });

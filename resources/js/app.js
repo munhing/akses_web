@@ -63,7 +63,7 @@ const app = new Vue({
 
         reloadList() {
 
-            axios.get('/api/portusersactive')
+            axios.get('http://llpm.dlinkddns.com:8084/api/portusersactive')
                 .then(response => {
                     this.profiles = response.data;
                 });
