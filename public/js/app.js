@@ -1961,7 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
       } // console.log(this.media[0].url_thumb);
 
 
-      return this.media[0].url_thumb;
+      return "http://llpm.dlinkddns.com:8084/" + this.media[0].url_thumb;
     }
   },
   mounted: function mounted() {
