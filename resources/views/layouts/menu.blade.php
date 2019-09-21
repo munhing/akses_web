@@ -13,6 +13,13 @@
 <li class="nav-item {{ Request::is('portusers*') ? 'active' : '' }}">
     <a class="nav-link" href="{!! route('portusers.index') !!}"><i class="nav-icon icon-cursor"></i><span>Portusers</span></a>
 </li>
-<li class="nav-item {{ Request::is('portusersActive*') ? 'active' : '' }}">
-    <a class="nav-link" href="{!! route('portusersActive.index') !!}"><i class="nav-icon icon-cursor"></i><span>PortusersActive</span></a>
+<li class="nav-item {{ Request::is('activePortusers*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('activePortusers.index') !!}"><i class="nav-icon icon-cursor"></i><span>ActivePortusers</span></a>
 </li>
+<li class="nav-item {{ Request::is('vehicles*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('vehicles.index') !!}"><i class="nav-icon icon-cursor"></i><span>Vehicles</span></a>
+</li>
+<li class="nav-item {{ Request::is('vehicleTypes*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('vehicleTypes.index') !!}"><i class="nav-icon icon-cursor"></i><span>VehicleTypes</span></a>
+</li>
+

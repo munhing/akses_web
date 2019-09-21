@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Models\PortuserActive;
+use App\Models\ActivePortuser;
 use App\Models\Portuser;
 use App\Events\ClockOut;
 use App\Events\PortuserClockIn;
@@ -21,7 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::apiResource('portusersactive', 'PortuserActiveController');
-Route::get('portusersactive', 'PortuserActiveController@index');
-Route::post('portusersactive', 'PortuserActiveController@clockIn');
-Route::delete('portusersactive', 'PortuserActiveController@clockOut');
+// Route::apiResource('activeportusers', 'ActivePortuserController');
+
+Route::get('activeportusers', 'ActivePortuserController@index');
+Route::post('activeportusers', 'ActivePortuserController@clockIn');
+Route::delete('activeportusers', 'ActivePortuserController@clockOut');

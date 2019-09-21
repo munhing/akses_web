@@ -2045,7 +2045,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var id = this.profile.portuser.id;
       console.log('uuid is: ' + this.profile.portuser.uuid);
-      axios["delete"]('/api/portusersactive', {
+      axios["delete"]('/api/activeportusers', {
         data: {
           uuid: this.profile.portuser.uuid
         }
@@ -2099,7 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
     // fetch data from database
     console.log('Component mounted.');
     console.log(window.location.hostname);
-    axios.get('/api/portusersactive').then(function (response) {
+    axios.get('/api/activeportusers').then(function (response) {
       _this2.$root.profiles = response.data;
     });
     window.Echo.channel('clocking').listen('ClockOut', function (e) {
@@ -88730,7 +88730,7 @@ var app = new Vue({
     reloadList: function reloadList() {
       var _this2 = this;
 
-      axios.get('/api/portusersactive').then(function (response) {
+      axios.get('/api/activeportusers').then(function (response) {
         _this2.profiles = response.data;
       });
     }

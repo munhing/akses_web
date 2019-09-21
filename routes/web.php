@@ -34,4 +34,8 @@ Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name
 
 Route::resource('monitors', 'MonitorController');
 
-Route::resource('portusersActive', 'PortuserActiveController');
+Route::resource('activePortusers', 'ActivePortuserController');
+
+Route::resource('vehicles', 'VehicleController');
+
+Route::resource('vehicleTypes', 'VehicleTypeController');

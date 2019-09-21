@@ -71,7 +71,7 @@
                 let id = this.profile.portuser.id;
 
                 console.log('uuid is: ' + this.profile.portuser.uuid);
-                axios.delete('/api/portusersactive', {
+                axios.delete('/api/activeportusers', {
                     data: {uuid: this.profile.portuser.uuid}
                 })
                 .then((response) => {
@@ -135,7 +135,7 @@
             // fetch data from database
             console.log('Component mounted.')
             console.log(window.location.hostname);
-            axios.get('/api/portusersactive')
+            axios.get('/api/activeportusers')
                 .then(response => {
                     this.$root.profiles = response.data;
                 });

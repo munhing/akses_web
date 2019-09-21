@@ -63,7 +63,7 @@ const app = new Vue({
 
         reloadList() {
 
-            axios.get('/api/portusersactive')
+            axios.get('/api/activeportusers')
                 .then(response => {
                     this.profiles = response.data;
                 });

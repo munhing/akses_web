@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePortusersActiveTable extends Migration
+class CreateVehiclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreatePortusersActiveTable extends Migration
      */
     public function up()
     {
-        Schema::create('active_portusers', function (Blueprint $table) {
+        Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->uuid('portuser_uuid');
+            $table->uuid('uuid')->unique();
+            $table->string('plate_no', 100);
+            $table->integer('company_id');
+            $table->integer('vehicle_type_id');
+            $table->date('expires_on');
+            $table->softDeletes();            
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreatePortusersActiveTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('active_portusers');
+        Schema::dropIfExists('vehicles');
     }
 }
