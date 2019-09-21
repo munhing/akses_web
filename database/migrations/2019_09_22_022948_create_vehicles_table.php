@@ -16,10 +16,10 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('uuid')->unique();
-            $table->string('plate_no', 100);
+            $table->string('plate_no', 100)->unique();
             $table->integer('company_id');
             $table->integer('vehicle_type_id');
-            $table->date('expires_on');
+            $table->timestamp('expires_on');
             $table->softDeletes();            
             $table->timestamps();
         });

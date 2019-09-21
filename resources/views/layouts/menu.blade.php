@@ -23,3 +23,6 @@
     <a class="nav-link" href="{!! route('vehicleTypes.index') !!}"><i class="nav-icon icon-cursor"></i><span>VehicleTypes</span></a>
 </li>
 
+<li class="nav-item {{ Request::is('activeVehicles*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('activeVehicles.index') !!}"><i class="nav-icon icon-cursor"></i><span>ActiveVehicles</span></a>
+</li>

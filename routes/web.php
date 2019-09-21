@@ -39,3 +39,5 @@ Route::resource('activePortusers', 'ActivePortuserController');
 Route::resource('vehicles', 'VehicleController');
 
 Route::resource('vehicleTypes', 'VehicleTypeController');
+
+Route::resource('activeVehicles', 'ActiveVehicleController');

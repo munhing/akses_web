@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PortusersActiveTableSeeder extends Seeder
+class ActiveVehiclesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class PortusersActiveTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Models\PortuserActive', 50)->create();
+        factory('App\Models\ActiveVehicle', 50)->create();
     }
 }

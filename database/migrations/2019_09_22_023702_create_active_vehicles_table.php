@@ -13,7 +13,7 @@ class CreateActiveVehiclesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehicles_active', function (Blueprint $table) {
+        Schema::create('active_vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('vehicle_uuid');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateActiveVehiclesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicles_active');
+        Schema::dropIfExists('active_vehicles');
     }
 }
