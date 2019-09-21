@@ -1961,7 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
       } // console.log(this.media[0].url_thumb);
 
 
-      return "http://llpm.dlinkddns.com:8084/" + this.media[0].url_thumb;
+      return this.media[0].url_thumb;
     }
   },
   mounted: function mounted() {
@@ -2099,7 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
     // fetch data from database
     console.log('Component mounted.');
     console.log(window.location.hostname);
-    axios.get('http://llpm.dlinkddns.com:8084/api/portusersactive').then(function (response) {
+    axios.get('/api/portusersactive').then(function (response) {
       _this2.$root.profiles = response.data;
     });
     window.Echo.channel('clocking').listen('ClockOut', function (e) {
@@ -88730,7 +88730,7 @@ var app = new Vue({
     reloadList: function reloadList() {
       var _this2 = this;
 
-      axios.get('http://llpm.dlinkddns.com:8084/api/portusersactive').then(function (response) {
+      axios.get('/api/portusersactive').then(function (response) {
         _this2.profiles = response.data;
       });
     }
