@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ActiveVehicle
@@ -14,16 +13,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ActiveVehicle extends Model
 {
-    use SoftDeletes;
-
     public $table = 'active_vehicles';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
-    protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'vehicle_uuid'
@@ -48,5 +41,8 @@ class ActiveVehicle extends Model
         'vehicle_uuid' => 'required'
     ];
 
-    
+    public function vehicle()
+    {
+        return $this->belongsTo('App\Models\Vehicle', 'vehicle_uuid', 'uuid');
+    }       
 }

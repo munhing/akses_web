@@ -6,7 +6,7 @@
                     id="uuid"
                     v-model="form.uuid"
                     required
-                    placeholder="Enter portuser uuid"
+                    placeholder="Enter vehicle uuid"
                 ></b-form-input>
             </b-form-group>
             <b-button class="mt-3" size="lg" block type="submit" variant="success">Clock In</b-button>   
@@ -32,7 +32,7 @@
                 // make an ajax call to clock in a port user
 
                 // send a post request to clock In
-                axios.post('/api/activeportusers', {
+                axios.post('/api/activevehicles', {
                     uuid: this.form.uuid
                 })
                 .then((response) => {
@@ -45,7 +45,7 @@
                 // this.removeProfile(id);
                 // get call to get the latest listing
 
-                console.log('Portuser with uuid: '+ this.form.uuid +' clock in!');
+                console.log('Vehicle with uuid: '+ this.form.uuid +' clock in!');
 
                 this.isVisible = false;                
             }

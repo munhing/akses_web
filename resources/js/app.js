@@ -27,6 +27,9 @@ Vue.component('profile-list', require('./components/ProfileList.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
 Vue.component('clock-in-modal', require('./components/ClockInModal.vue').default);
 
+Vue.component('vehicle-list', require('./components/VehicleList.vue').default);
+Vue.component('vehicle-card', require('./components/VehicleCard.vue').default);
+Vue.component('vehicle-clock-in-modal', require('./components/VehicleClockInModal.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -43,6 +46,7 @@ const app = new Vue({
 
     data: {
         profiles: [],
+        vehicles: [],
         search: ''
     },
 
@@ -51,7 +55,13 @@ const app = new Vue({
             return this.profiles.filter(profile => {
                 return (profile.portuser.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (profile.portuser.company.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
             });
-        }
+        },
+
+        filteredVehicles() {
+            return this.vehicles.filter(vehicle => {
+                return (vehicle.vehicle.plate_no.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (vehicle.vehicle.company.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (vehicle.vehicle.type.type.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
+            });
+        }        
     },
 
     methods: {
@@ -61,13 +71,25 @@ const app = new Vue({
             this.$refs.myModal.isVisible = true;
         },
 
+        vehicleClockInModal() {
+            console.log('Vehicle Clock In button was pressed!');
+            this.$refs.myVehicleModal.isVisible = true;
+        },
+
         reloadList() {
 
             axios.get('/api/activeportusers')
                 .then(response => {
                     this.profiles = response.data;
                 });
+        }, 
+        
+        reloadVehicleList() {
 
-        },        
+            axios.get('/api/activevehicles')
+                .then(response => {
+                    this.vehicles = response.data;
+                });
+        },         
     }
 });

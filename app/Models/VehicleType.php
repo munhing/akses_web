@@ -46,7 +46,5 @@ class VehicleType extends Model
      */
     public static $rules = [
         'type' => 'required'
-    ];
-
-    
+    ];   
 }

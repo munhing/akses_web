@@ -64,5 +64,14 @@ class Vehicle extends Model
         'expires_on' => 'required'
     ];
 
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\VehicleType','vehicle_type_id');
+    }
     
 }

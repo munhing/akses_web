@@ -52,5 +52,9 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Portuser');
     }
-    
+   
+    public function vehicles()
+    {
+        return $this->hasMany('App\Models\Vehicle');
+    }
 }

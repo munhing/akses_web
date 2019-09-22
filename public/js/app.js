@@ -1892,7 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault(); // make an ajax call to clock in a port user
       // send a post request to clock In
 
-      axios.post('/api/portusersactive', {
+      axios.post('/api/activeportusers', {
         uuid: this.form.uuid
       }).then(function (response) {
         console.log(response);
@@ -2116,6 +2116,234 @@ __webpack_require__.r(__webpack_exports__);
       _this2.$root.reloadList();
 
       console.log('Portuser has clock In!');
+      console.log(e);
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleCard.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VehicleCard.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['plateNo', 'company', 'type'],
+  methods: {
+    emit: function emit(event) {
+      this.$emit('vehicleClicked', this.$vnode.key);
+    }
+  },
+  mounted: function mounted() {
+    console.log('VehicleCard mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleClockInModal.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VehicleClockInModal.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isVisible: false,
+      form: {
+        uuid: ''
+      }
+    };
+  },
+  methods: {
+    clockIn: function clockIn(e) {
+      var _this = this;
+
+      e.preventDefault(); // make an ajax call to clock in a port user
+      // send a post request to clock In
+
+      axios.post('/api/activevehicles', {
+        uuid: this.form.uuid
+      }).then(function (response) {
+        console.log(response);
+
+        _this.$root.reloadList();
+      })["catch"](function (error) {
+        console.log(error);
+      }); // this.removeProfile(id);
+      // get call to get the latest listing
+
+      console.log('Vehicle with uuid: ' + this.form.uuid + ' clock in!');
+      this.isVisible = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleList.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VehicleList.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      fromChild: false,
+      vehicle: [],
+      plateNo: "",
+      company: "",
+      type: ""
+    };
+  },
+  computed: {
+    getVehicles: function getVehicles() {
+      return this.$root.filteredVehicles;
+    }
+  },
+  methods: {
+    onVehicleClick: function onVehicleClick(value) {
+      this.fromChild = true;
+      this.vehicle = this.getVehicle(value);
+      this.plateNo = this.vehicle.vehicle.plate_no;
+      this.company = this.vehicle.vehicle.company.name;
+      this.type = this.vehicle.vehicle.type.type;
+      console.log('onVehicleClick method: ' + this.plateNo);
+    },
+    getVehicle: function getVehicle(id) {
+      var vehicle;
+      this.$root.vehicles.forEach(function (item) {
+        if (id == item.vehicle.id) {
+          vehicle = item;
+        }
+      });
+      return vehicle;
+    },
+    clockOut: function clockOut() {
+      // this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid;
+      // send a post request to clock out
+      var id = this.vehicle.vehicle.id;
+      console.log('uuid is: ' + this.vehicle.vehicle.uuid);
+      axios["delete"]('/api/activevehicles', {
+        data: {
+          uuid: this.vehicle.vehicle.uuid
+        }
+      }).then(function (response) {
+        console.log(response); // this.removeProfile(id);
+      })["catch"](function (error) {
+        console.log(error);
+      }); // this.removeProfile(id);
+      // get call to get the latest listing
+
+      console.log(this.vehicle.vehicle.uuid);
+      this.fromChild = false; // this.reloadList();
+    },
+    removeVehicle: function removeVehicle(id) {
+      var i;
+      var index;
+
+      for (i = 0; i < this.$root.vehicles.length; i++) {
+        if (id == this.$root.vehicles[i].vehicle.id) {
+          index = i;
+        }
+      }
+
+      console.log('Vehicle index is ' + index);
+      this.$delete(this.$root.vehicles, index);
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // fetch data from database
+    console.log('Vehicle List Component mounted.');
+    console.log(window.location.hostname);
+    axios.get('/api/activevehicles').then(function (response) {
+      _this.$root.vehicles = response.data;
+    });
+    window.Echo.channel('clocking').listen('VehicleClockOut', function (e) {
+      // this.$root.profiles = [];
+      // this.makeToast(); // Not working
+      _this.$root.reloadVehicleList();
+
+      console.log('Vehicle has clock out!');
+      console.log(e);
+    });
+    window.Echo.channel('clocking').listen('VehicleClockIn', function (e) {
+      // this.$root.profiles = [];
+      // this.makeToast(); // Not working
+      _this.$root.reloadVehicleList();
+
+      console.log('Vehicle has clock In!');
       console.log(e);
     });
   }
@@ -76527,6 +76755,236 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleCard.vue?vue&type=template&id=b5c1157e&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VehicleCard.vue?vue&type=template&id=b5c1157e& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-xs-4 col-sm-3 col-lg-2" }, [
+    _c("div", { staticClass: "brand-card" }, [
+      _c("div", { staticClass: "brand-card-body" }, [
+        _c("div", [
+          _c("div", { staticClass: "text-value" }, [
+            _c("a", { attrs: { href: "#" }, on: { click: _vm.emit } }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.plateNo) +
+                  "\n                    "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-uppercase text-muted small" }, [
+            _vm._v(_vm._s(_vm.company))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-muted" }, [_vm._v(_vm._s(_vm.type))])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleClockInModal.vue?vue&type=template&id=813ece6a&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VehicleClockInModal.vue?vue&type=template&id=813ece6a& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-modal",
+    {
+      attrs: {
+        title: "Modal title",
+        centered: "",
+        size: "sm",
+        "hide-header": "",
+        "hide-footer": ""
+      },
+      on: {
+        ok: function($event) {
+          _vm.isVisible = false
+        }
+      },
+      model: {
+        value: _vm.isVisible,
+        callback: function($$v) {
+          _vm.isVisible = $$v
+        },
+        expression: "isVisible"
+      }
+    },
+    [
+      _c(
+        "b-form",
+        { on: { submit: _vm.clockIn } },
+        [
+          _c(
+            "b-form-group",
+            {
+              attrs: { id: "input-group-1", label: "Uuid", "label-for": "uuid" }
+            },
+            [
+              _c("b-form-input", {
+                attrs: {
+                  id: "uuid",
+                  required: "",
+                  placeholder: "Enter vehicle uuid"
+                },
+                model: {
+                  value: _vm.form.uuid,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "uuid", $$v)
+                  },
+                  expression: "form.uuid"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-button",
+            {
+              staticClass: "mt-3",
+              attrs: {
+                size: "lg",
+                block: "",
+                type: "submit",
+                variant: "success"
+              }
+            },
+            [_vm._v("Clock In")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleList.vue?vue&type=template&id=145b9862&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VehicleList.vue?vue&type=template&id=145b9862& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _vm._l(_vm.getVehicles, function(vl) {
+        return _c("vehicle-card", {
+          key: vl.vehicle.id,
+          attrs: {
+            plateNo: vl.vehicle.plate_no,
+            company: vl.vehicle.company.name,
+            type: vl.vehicle.type.type
+          },
+          on: { vehicleClicked: _vm.onVehicleClick }
+        })
+      }),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            title: "Modal title",
+            centered: "",
+            size: "sm",
+            "hide-header": "",
+            "hide-footer": ""
+          },
+          on: {
+            ok: function($event) {
+              _vm.fromChild = false
+            }
+          },
+          model: {
+            value: _vm.fromChild,
+            callback: function($$v) {
+              _vm.fromChild = $$v
+            },
+            expression: "fromChild"
+          }
+        },
+        [
+          _c("div", { staticClass: "d-block text-center" }, [
+            _c("div", { staticClass: "text-value" }, [
+              _vm._v(_vm._s(_vm.plateNo))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-uppercase text-muted small" }, [
+              _vm._v(_vm._s(_vm.company))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-muted" }, [_vm._v(_vm._s(_vm.type))])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-button",
+            {
+              staticClass: "mt-3",
+              attrs: { size: "lg", block: "", variant: "danger" },
+              on: { click: _vm.clockOut }
+            },
+            [_vm._v("Clock Out")]
+          )
+        ],
+        1
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -88698,6 +89156,9 @@ Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]); // Telling Vue t
 Vue.component('profile-list', __webpack_require__(/*! ./components/ProfileList.vue */ "./resources/js/components/ProfileList.vue")["default"]);
 Vue.component('profile-card', __webpack_require__(/*! ./components/ProfileCard.vue */ "./resources/js/components/ProfileCard.vue")["default"]);
 Vue.component('clock-in-modal', __webpack_require__(/*! ./components/ClockInModal.vue */ "./resources/js/components/ClockInModal.vue")["default"]);
+Vue.component('vehicle-list', __webpack_require__(/*! ./components/VehicleList.vue */ "./resources/js/components/VehicleList.vue")["default"]);
+Vue.component('vehicle-card', __webpack_require__(/*! ./components/VehicleCard.vue */ "./resources/js/components/VehicleCard.vue")["default"]);
+Vue.component('vehicle-clock-in-modal', __webpack_require__(/*! ./components/VehicleClockInModal.vue */ "./resources/js/components/VehicleClockInModal.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -88711,6 +89172,7 @@ var app = new Vue({
   el: '#app',
   data: {
     profiles: [],
+    vehicles: [],
     search: ''
   },
   computed: {
@@ -88720,6 +89182,13 @@ var app = new Vue({
       return this.profiles.filter(function (profile) {
         return profile.portuser.name.toLowerCase().indexOf(_this.search.toLowerCase()) !== -1 || profile.portuser.company.name.toLowerCase().indexOf(_this.search.toLowerCase()) !== -1;
       });
+    },
+    filteredVehicles: function filteredVehicles() {
+      var _this2 = this;
+
+      return this.vehicles.filter(function (vehicle) {
+        return vehicle.vehicle.plate_no.toLowerCase().indexOf(_this2.search.toLowerCase()) !== -1 || vehicle.vehicle.company.name.toLowerCase().indexOf(_this2.search.toLowerCase()) !== -1 || vehicle.vehicle.type.type.toLowerCase().indexOf(_this2.search.toLowerCase()) !== -1;
+      });
     }
   },
   methods: {
@@ -88727,11 +89196,22 @@ var app = new Vue({
       console.log('Clock In button was pressed!');
       this.$refs.myModal.isVisible = true;
     },
+    vehicleClockInModal: function vehicleClockInModal() {
+      console.log('Vehicle Clock In button was pressed!');
+      this.$refs.myVehicleModal.isVisible = true;
+    },
     reloadList: function reloadList() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/api/activeportusers').then(function (response) {
-        _this2.profiles = response.data;
+        _this3.profiles = response.data;
+      });
+    },
+    reloadVehicleList: function reloadVehicleList() {
+      var _this4 = this;
+
+      axios.get('/api/activevehicles').then(function (response) {
+        _this4.vehicles = response.data;
       });
     }
   }
@@ -88991,6 +89471,213 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileList_vue_vue_type_template_id_3ecd614c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileList_vue_vue_type_template_id_3ecd614c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleCard.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/VehicleCard.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VehicleCard_vue_vue_type_template_id_b5c1157e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VehicleCard.vue?vue&type=template&id=b5c1157e& */ "./resources/js/components/VehicleCard.vue?vue&type=template&id=b5c1157e&");
+/* harmony import */ var _VehicleCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VehicleCard.vue?vue&type=script&lang=js& */ "./resources/js/components/VehicleCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VehicleCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VehicleCard_vue_vue_type_template_id_b5c1157e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VehicleCard_vue_vue_type_template_id_b5c1157e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VehicleCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleCard.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/VehicleCard.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VehicleCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleCard.vue?vue&type=template&id=b5c1157e&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/VehicleCard.vue?vue&type=template&id=b5c1157e& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleCard_vue_vue_type_template_id_b5c1157e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VehicleCard.vue?vue&type=template&id=b5c1157e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleCard.vue?vue&type=template&id=b5c1157e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleCard_vue_vue_type_template_id_b5c1157e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleCard_vue_vue_type_template_id_b5c1157e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleClockInModal.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/VehicleClockInModal.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VehicleClockInModal_vue_vue_type_template_id_813ece6a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VehicleClockInModal.vue?vue&type=template&id=813ece6a& */ "./resources/js/components/VehicleClockInModal.vue?vue&type=template&id=813ece6a&");
+/* harmony import */ var _VehicleClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VehicleClockInModal.vue?vue&type=script&lang=js& */ "./resources/js/components/VehicleClockInModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VehicleClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VehicleClockInModal_vue_vue_type_template_id_813ece6a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VehicleClockInModal_vue_vue_type_template_id_813ece6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VehicleClockInModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleClockInModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/VehicleClockInModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VehicleClockInModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleClockInModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleClockInModal.vue?vue&type=template&id=813ece6a&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/VehicleClockInModal.vue?vue&type=template&id=813ece6a& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleClockInModal_vue_vue_type_template_id_813ece6a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VehicleClockInModal.vue?vue&type=template&id=813ece6a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleClockInModal.vue?vue&type=template&id=813ece6a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleClockInModal_vue_vue_type_template_id_813ece6a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleClockInModal_vue_vue_type_template_id_813ece6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleList.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/VehicleList.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VehicleList_vue_vue_type_template_id_145b9862___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VehicleList.vue?vue&type=template&id=145b9862& */ "./resources/js/components/VehicleList.vue?vue&type=template&id=145b9862&");
+/* harmony import */ var _VehicleList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VehicleList.vue?vue&type=script&lang=js& */ "./resources/js/components/VehicleList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VehicleList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VehicleList_vue_vue_type_template_id_145b9862___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VehicleList_vue_vue_type_template_id_145b9862___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VehicleList.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleList.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/VehicleList.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VehicleList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VehicleList.vue?vue&type=template&id=145b9862&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/VehicleList.vue?vue&type=template&id=145b9862& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleList_vue_vue_type_template_id_145b9862___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VehicleList.vue?vue&type=template&id=145b9862& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VehicleList.vue?vue&type=template&id=145b9862&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleList_vue_vue_type_template_id_145b9862___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VehicleList_vue_vue_type_template_id_145b9862___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

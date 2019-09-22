@@ -26,3 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('activeportusers', 'ActivePortuserController@index');
 Route::post('activeportusers', 'ActivePortuserController@clockIn');
 Route::delete('activeportusers', 'ActivePortuserController@clockOut');
+
+Route::get('activevehicles', 'ActiveVehicleController@index');
+Route::post('activevehicles', 'ActiveVehicleController@clockIn');
+Route::delete('activevehicles', 'ActiveVehicleController@clockOut');
