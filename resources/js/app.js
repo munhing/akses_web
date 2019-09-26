@@ -30,6 +30,10 @@ Vue.component('clock-in-modal', require('./components/ClockInModal.vue').default
 Vue.component('vehicle-list', require('./components/VehicleList.vue').default);
 Vue.component('vehicle-card', require('./components/VehicleCard.vue').default);
 Vue.component('vehicle-clock-in-modal', require('./components/VehicleClockInModal.vue').default);
+
+Vue.component('visitor-list', require('./components/VisitorList.vue').default);
+Vue.component('visitor-card', require('./components/VisitorCard.vue').default);
+Vue.component('visitor-clock-in-modal', require('./components/VisitorClockInModal.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -47,6 +51,7 @@ const app = new Vue({
     data: {
         profiles: [],
         vehicles: [],
+        visitors: [],
         search: ''
     },
 
@@ -61,7 +66,13 @@ const app = new Vue({
             return this.vehicles.filter(vehicle => {
                 return (vehicle.vehicle.plate_no.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (vehicle.vehicle.company.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (vehicle.vehicle.type.type.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
             });
-        }        
+        },
+        
+        filteredVisitors() {
+            return this.visitors.filter(visitor => {
+                return (visitor.visitor.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.company.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.nric.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
+            });           
+        }
     },
 
     methods: {
@@ -74,6 +85,11 @@ const app = new Vue({
         vehicleClockInModal() {
             console.log('Vehicle Clock In button was pressed!');
             this.$refs.myVehicleModal.isVisible = true;
+        },
+
+        visitorClockInModal() {
+            console.log('Visitor Clock In button was pressed!');
+            this.$refs.myVisitorModal.isVisible = true;
         },
 
         reloadList() {
@@ -90,6 +106,14 @@ const app = new Vue({
                 .then(response => {
                     this.vehicles = response.data;
                 });
-        },         
+        },      
+
+        reloadVisitorList() {
+
+            axios.get('/api/activevisitors')
+                .then(response => {
+                    this.visitors = response.data;
+                });
+        },              
     }
 });

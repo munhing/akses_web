@@ -6,7 +6,7 @@
                     id="uuid"
                     v-model="form.uuid"
                     required
-                    placeholder="Enter vehicle uuid"
+                    placeholder="Enter Visitor Uuid"
                 ></b-form-input>
             </b-form-group>
             <b-button class="mt-3" size="lg" block type="submit" variant="success">Clock In</b-button>   
@@ -32,12 +32,12 @@
                 // make an ajax call to clock in a port user
 
                 // send a post request to clock In
-                axios.post('/api/activevehicles', {
+                axios.post('/api/activevisitors', {
                     uuid: this.form.uuid
                 })
                 .then((response) => {
                     console.log(response);
-                    this.$root.reloadVehicleList();
+                    this.$root.reloadList();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -45,7 +45,7 @@
                 // this.removeProfile(id);
                 // get call to get the latest listing
 
-                console.log('Vehicle with uuid: '+ this.form.uuid +' clock in!');
+                console.log('Visitor with uuid: '+ this.form.uuid +' clock in!');
 
                 this.isVisible = false;                
             }

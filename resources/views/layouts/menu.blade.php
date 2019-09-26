@@ -26,3 +26,15 @@
 <li class="nav-item {{ Request::is('activeVehicles*') ? 'active' : '' }}">
     <a class="nav-link" href="{!! route('activeVehicles.index') !!}"><i class="nav-icon icon-cursor"></i><span>ActiveVehicles</span></a>
 </li>
+<li class="nav-item {{ Request::is('visitors*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('visitors.index') !!}"><i class="nav-icon icon-cursor"></i><span>Visitors</span></a>
+</li>
+<li class="nav-item {{ Request::is('visitorCards*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('visitorCards.index') !!}"><i class="nav-icon icon-cursor"></i><span>VisitorCards</span></a>
+</li>
+<li class="nav-item {{ Request::is('activeVisitors*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('activeVisitors.index') !!}"><i class="nav-icon icon-cursor"></i><span>ActiveVisitors</span></a>
+</li>
+<li class="nav-item {{ Request::is('visitors*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('visitors.index') !!}"><i class="nav-icon icon-cursor"></i><span>Visitors</span></a>
+</li>

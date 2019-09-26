@@ -41,3 +41,11 @@ Route::resource('vehicles', 'VehicleController');
 Route::resource('vehicleTypes', 'VehicleTypeController');
 
 Route::resource('activeVehicles', 'ActiveVehicleController');
+
+Route::resource('visitors', 'VisitorController');
+
+Route::resource('visitorCards', 'VisitorCardController');
+
+Route::resource('activeVisitors', 'ActiveVisitorController');
+
+Route::resource('visitors', 'VisitorController');

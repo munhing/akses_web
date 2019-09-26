@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(ActivePortusersTableSeeder::class);
         // $this->call(VehicleTypesTableSeeder::class);
         // $this->call(VehiclesTableSeeder::class);
-        $this->call(ActiveVehiclesTableSeeder::class);
+        // $this->call(ActiveVehiclesTableSeeder::class);
+        // $this->call(VisitorsTableSeeder::class);
+        // $this->call(VisitorCardsTableSeeder::class);
+        $this->call(ActiveVisitorsTableSeeder::class);
     }
 }

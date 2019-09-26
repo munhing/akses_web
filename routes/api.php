@@ -30,3 +30,7 @@ Route::delete('activeportusers', 'ActivePortuserController@clockOut');
 Route::get('activevehicles', 'ActiveVehicleController@index');
 Route::post('activevehicles', 'ActiveVehicleController@clockIn');
 Route::delete('activevehicles', 'ActiveVehicleController@clockOut');
+
+Route::get('activevisitors', 'ActiveVisitorController@index');
+Route::post('activevisitors', 'ActiveVisitorController@clockIn');
+Route::delete('activevisitors', 'ActiveVisitorController@clockOut');
