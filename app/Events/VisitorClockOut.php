@@ -14,16 +14,16 @@ class VisitorClockOut implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $visitor;
+    public $visitorCard;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($visitor)
+    public function __construct($visitorCard)
     {
-        $this->visitor = $visitor;
+        $this->visitorCard = $visitorCard;
     }
 
     /**

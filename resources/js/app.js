@@ -70,7 +70,7 @@ const app = new Vue({
         
         filteredVisitors() {
             return this.visitors.filter(visitor => {
-                return (visitor.visitor.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.company.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.nric.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
+                return (visitor.card.description.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.company.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.nric.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
             });           
         }
     },

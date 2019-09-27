@@ -1,14 +1,24 @@
 <template>
     <b-modal title="Modal title" v-model="isVisible" @ok="isVisible = false" centered size="sm" hide-header hide-footer>
         <b-form @submit="clockIn">
-            <b-form-group id="input-group-1" label="Uuid" label-for="uuid">
+            <b-form-group id="input-group-1" label="Visitor Card Uuid" label-for="visitor_card_uuid">
                 <b-form-input
-                    id="uuid"
-                    v-model="form.uuid"
+                    id="visitor_card_uuid"
+                    v-model="form.visitorCardUuid"
+                    required
+                    placeholder="Enter Visitor Card Uuid"
+                ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-1" label="Visitor Uuid" label-for="visitor_uuid">
+                <b-form-input
+                    id="visitor_uuid"
+                    v-model="form.visitorUuid"
                     required
                     placeholder="Enter Visitor Uuid"
                 ></b-form-input>
             </b-form-group>
+
             <b-button class="mt-3" size="lg" block type="submit" variant="success">Clock In</b-button>   
         </b-form>       
     </b-modal>
@@ -21,7 +31,8 @@
             return {
                 isVisible: false,
                 form: {
-                    uuid: ''
+                    visitorCardUuid: '',
+                    visitorUuid: ''
                 }
             }
         },
@@ -45,7 +56,7 @@
                 // this.removeProfile(id);
                 // get call to get the latest listing
 
-                console.log('Visitor with uuid: '+ this.form.uuid +' clock in!');
+                console.log('Visitor with card uuid: '+ this.form.visitor_card_uuid +' clock in!');
 
                 this.isVisible = false;                
             }

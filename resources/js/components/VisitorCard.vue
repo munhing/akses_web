@@ -1,7 +1,18 @@
 <template>
     <div class="col-xs-4 col-sm-3 col-lg-2">
-        <div class="brand-card">
+        <div class="brand-card pad1">
+            <div class="profile-card-header align-center">
+
+                <div class="chart-wrapper">
+                
+                    <div class="text-value">
+                            {{ cardDescription }}
+                    </div> 
+                </div>               
+
+            </div>     
             <div class="brand-card-body">
+                
                 <div>
                     <div class="text-value">
                         <a href="#" @click="emit">
@@ -20,7 +31,7 @@
 <script>
     export default {
 
-        props: ['name', 'company', 'nric'],
+        props: ['name', 'company', 'nric', 'cardDescription'],
 
         methods: {
             emit(event) {

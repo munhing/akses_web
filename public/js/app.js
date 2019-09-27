@@ -2379,8 +2379,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'company', 'nric'],
+  props: ['name', 'company', 'nric', 'cardDescription'],
   methods: {
     emit: function emit(event) {
       this.$emit('visitorClicked', this.$vnode.key);
@@ -2418,12 +2429,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isVisible: false,
       form: {
-        uuid: ''
+        visitorCardUuid: '',
+        visitorUuid: ''
       }
     };
   },
@@ -2445,7 +2467,7 @@ __webpack_require__.r(__webpack_exports__);
       }); // this.removeProfile(id);
       // get call to get the latest listing
 
-      console.log('Visitor with uuid: ' + this.form.uuid + ' clock in!');
+      console.log('Visitor with card uuid: ' + this.form.visitor_card_uuid + ' clock in!');
       this.isVisible = false;
     }
   }
@@ -2462,6 +2484,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2506,8 +2530,8 @@ __webpack_require__.r(__webpack_exports__);
       this.visitor = this.getVisitor(value);
       this.name = this.visitor.visitor.name;
       this.company = this.visitor.visitor.company;
-      this.nric = this.visitor.visitor.nric; // this.cardDescription = this.visitor.visitor.type.type;
-
+      this.nric = this.visitor.visitor.nric;
+      this.cardDescription = this.visitor.card.description;
       console.log('onVisitorClick method: ' + this.name);
     },
     getVisitor: function getVisitor(id) {
@@ -2523,10 +2547,10 @@ __webpack_require__.r(__webpack_exports__);
       // this.qrcode = "type=1&uuid=" + this.profile.portuser.uuid;
       // send a post request to clock out
       var id = this.visitor.visitor.id;
-      console.log('uuid is: ' + this.visitor.visitor.uuid);
+      console.log('uuid is: ' + this.visitor.card.uuid);
       axios["delete"]('/api/activevisitors', {
         data: {
-          uuid: this.visitor.visitor.uuid
+          uuid: this.visitor.card.uuid
         }
       }).then(function (response) {
         console.log(response); // this.removeProfile(id);
@@ -2535,7 +2559,7 @@ __webpack_require__.r(__webpack_exports__);
       }); // this.removeProfile(id);
       // get call to get the latest listing
 
-      console.log(this.visitor.visitor.uuid);
+      console.log(this.visitor.card.uuid);
       this.fromChild = false; // this.reloadList();
     },
     removeVisitor: function removeVisitor(id) {
@@ -77232,7 +77256,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-xs-4 col-sm-3 col-lg-2" }, [
-    _c("div", { staticClass: "brand-card" }, [
+    _c("div", { staticClass: "brand-card pad1" }, [
+      _c("div", { staticClass: "profile-card-header align-center" }, [
+        _c("div", { staticClass: "chart-wrapper" }, [
+          _c("div", { staticClass: "text-value" }, [
+            _vm._v(
+              "\n                        " +
+                _vm._s(_vm.cardDescription) +
+                "\n                "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "brand-card-body" }, [
         _c("div", [
           _c("div", { staticClass: "text-value" }, [
@@ -77308,21 +77344,53 @@ var render = function() {
           _c(
             "b-form-group",
             {
-              attrs: { id: "input-group-1", label: "Uuid", "label-for": "uuid" }
+              attrs: {
+                id: "input-group-1",
+                label: "Visitor Card Uuid",
+                "label-for": "visitor_card_uuid"
+              }
             },
             [
               _c("b-form-input", {
                 attrs: {
-                  id: "uuid",
+                  id: "visitor_card_uuid",
+                  required: "",
+                  placeholder: "Enter Visitor Card Uuid"
+                },
+                model: {
+                  value: _vm.form.visitorCardUuid,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "visitorCardUuid", $$v)
+                  },
+                  expression: "form.visitorCardUuid"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "input-group-1",
+                label: "Visitor Uuid",
+                "label-for": "visitor_uuid"
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: {
+                  id: "visitor_uuid",
                   required: "",
                   placeholder: "Enter Visitor Uuid"
                 },
                 model: {
-                  value: _vm.form.uuid,
+                  value: _vm.form.visitorUuid,
                   callback: function($$v) {
-                    _vm.$set(_vm.form, "uuid", $$v)
+                    _vm.$set(_vm.form, "visitorUuid", $$v)
                   },
-                  expression: "form.uuid"
+                  expression: "form.visitorUuid"
                 }
               })
             ],
@@ -77380,8 +77448,9 @@ var render = function() {
           key: vl.visitor.id,
           attrs: {
             name: vl.visitor.name,
-            company: vl.visitor.company.name,
-            nric: vl.visitor.nric
+            company: vl.visitor.company,
+            nric: vl.visitor.nric,
+            cardDescription: vl.card.description
           },
           on: { visitorClicked: _vm.onVisitorClick }
         })
@@ -77415,6 +77484,8 @@ var render = function() {
             _c("div", { staticClass: "text-value" }, [
               _vm._v(_vm._s(_vm.cardDescription))
             ]),
+            _vm._v(" "),
+            _c("hr"),
             _vm._v(" "),
             _c("div", { staticClass: "text-value" }, [
               _vm._v(_vm._s(_vm.name))
@@ -89665,7 +89736,7 @@ var app = new Vue({
       var _this3 = this;
 
       return this.visitors.filter(function (visitor) {
-        return visitor.visitor.name.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1 || visitor.visitor.company.name.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1 || visitor.visitor.nric.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1;
+        return visitor.card.description.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1 || visitor.visitor.name.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1 || visitor.visitor.company.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1 || visitor.visitor.nric.toLowerCase().indexOf(_this3.search.toLowerCase()) !== -1;
       });
     }
   },

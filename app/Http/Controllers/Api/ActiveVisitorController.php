@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveVisitor;
+use App\Models\VisitorCard;
+use App\Events\VisitorClockOut;
+use App\Events\VisitorClockIn;
 
 class ActiveVisitorController extends Controller
 {
@@ -15,19 +18,55 @@ class ActiveVisitorController extends Controller
      */
     public function index()
     {
-        return ActiveVisitor::with(['visitor', 'cards'])->orderByDesc('id')->get();
+        return ActiveVisitor::with(['visitor', 'card'])->orderByDesc('id')->get();
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function clockOut(Request $request)
+    {
+        // return $request;
+        $visitorCard = VisitorCard::where('uuid', '=', $request['uuid'])->get();
+        // return $portuser;
+        $clockingOut = ActiveVisitor::where('visitor_card_uuid', '=', $request['uuid'])->delete();
+        
+        if($clockingOut) {
+            VisitorClockOut::dispatch($visitorCard);
+        }
+
+        return $clockingOut;
+    }  
+
+        /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function clockIn(Request $request)
     {
-        //
-    }
+        $visitorCard = VisitorCard::where('uuid', '=', $request['visitor_card_uuid'])->get();
+
+        if(count($visitorCard) == 0) {
+            return null;
+        }
+
+        $clockingIn = new ActiveVisitor;
+        $clockingIn->visitor_card_uuid = $request['visitor_card_uuid'];
+        $clockingIn->visitor_uuid = $request['visitor_uuid'];
+        $clockingIn->save();
+        
+        if($clockingIn) {
+            VisitorClockIn::dispatch($vehicle);
+            // dd($clockingIn);
+        }
+
+        return $clockingIn;
+    }  
 
     /**
      * Display the specified resource.

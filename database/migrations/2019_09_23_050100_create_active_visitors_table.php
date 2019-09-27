@@ -15,8 +15,8 @@ class CreateActiveVisitorsTable extends Migration
     {
         Schema::create('active_visitors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->uuid('visitor_uuid');
             $table->uuid('visitor_card_uuid');
+            $table->uuid('visitor_uuid');
             $table->timestamps();
         });
     }
