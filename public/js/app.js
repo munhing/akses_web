@@ -2457,17 +2457,18 @@ __webpack_require__.r(__webpack_exports__);
       // send a post request to clock In
 
       axios.post('/api/activevisitors', {
-        uuid: this.form.uuid
+        card_uuid: this.form.visitorCardUuid,
+        visitor_uuid: this.form.visitorUuid
       }).then(function (response) {
         console.log(response);
 
-        _this.$root.reloadList();
+        _this.$root.reloadVisitorList();
       })["catch"](function (error) {
         console.log(error);
       }); // this.removeProfile(id);
       // get call to get the latest listing
 
-      console.log('Visitor with card uuid: ' + this.form.visitor_card_uuid + ' clock in!');
+      console.log('Visitor with card uuid: ' + this.form.visitorCardUuid + ' clock in!');
       this.isVisible = false;
     }
   }
@@ -2537,7 +2538,7 @@ __webpack_require__.r(__webpack_exports__);
     getVisitor: function getVisitor(id) {
       var visitor;
       this.$root.visitors.forEach(function (item) {
-        if (id == item.visitor.id) {
+        if (id == item.card.id) {
           visitor = item;
         }
       });
@@ -2559,7 +2560,8 @@ __webpack_require__.r(__webpack_exports__);
       }); // this.removeProfile(id);
       // get call to get the latest listing
 
-      console.log(this.visitor.card.uuid);
+      console.log('card uuid: ' + this.visitor.card.uuid);
+      console.log('visitor uuid: ' + this.visitor.visitor.uuid);
       this.fromChild = false; // this.reloadList();
     },
     removeVisitor: function removeVisitor(id) {
@@ -77445,7 +77447,7 @@ var render = function() {
     [
       _vm._l(_vm.getVisitors, function(vl) {
         return _c("visitor-card", {
-          key: vl.visitor.id,
+          key: vl.card.id,
           attrs: {
             name: vl.visitor.name,
             company: vl.visitor.company,

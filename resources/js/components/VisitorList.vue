@@ -2,7 +2,7 @@
     <div class="row"> 
         <visitor-card 
             v-for="vl in getVisitors"
-            :key="vl.visitor.id"
+            :key="vl.card.id"
             :name="vl.visitor.name"               
             :company="vl.visitor.company"
             :nric="vl.visitor.nric"
@@ -59,7 +59,7 @@
                 let visitor;
 
                 this.$root.visitors.forEach(function(item){
-                    if (id == item.visitor.id) {
+                    if (id == item.card.id) {
                         visitor = item;
                     }
                 });
@@ -86,7 +86,8 @@
                 // this.removeProfile(id);
                 // get call to get the latest listing
 
-                console.log(this.visitor.card.uuid);
+                console.log('card uuid: ' + this.visitor.card.uuid);
+                console.log('visitor uuid: ' + this.visitor.visitor.uuid);
 
                 this.fromChild = false;
 

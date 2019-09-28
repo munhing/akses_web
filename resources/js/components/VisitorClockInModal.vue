@@ -44,11 +44,12 @@
 
                 // send a post request to clock In
                 axios.post('/api/activevisitors', {
-                    uuid: this.form.uuid
+                    card_uuid: this.form.visitorCardUuid,
+                    visitor_uuid: this.form.visitorUuid
                 })
                 .then((response) => {
                     console.log(response);
-                    this.$root.reloadList();
+                    this.$root.reloadVisitorList();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -56,7 +57,7 @@
                 // this.removeProfile(id);
                 // get call to get the latest listing
 
-                console.log('Visitor with card uuid: '+ this.form.visitor_card_uuid +' clock in!');
+                console.log('Visitor with card uuid: '+ this.form.visitorCardUuid +' clock in!');
 
                 this.isVisible = false;                
             }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveVisitor;
 use App\Models\VisitorCard;
+use App\Models\Visitor;
 use App\Events\VisitorClockOut;
 use App\Events\VisitorClockIn;
 
@@ -49,19 +50,21 @@ class ActiveVisitorController extends Controller
      */
     public function clockIn(Request $request)
     {
-        $visitorCard = VisitorCard::where('uuid', '=', $request['visitor_card_uuid'])->get();
+        // return $request;
 
-        if(count($visitorCard) == 0) {
+        $visitor = Visitor::where('uuid', '=', $request['visitor_uuid'])->get();
+
+        if(count($visitor) == 0) {
             return null;
         }
 
         $clockingIn = new ActiveVisitor;
-        $clockingIn->visitor_card_uuid = $request['visitor_card_uuid'];
+        $clockingIn->visitor_card_uuid = $request['card_uuid'];
         $clockingIn->visitor_uuid = $request['visitor_uuid'];
         $clockingIn->save();
         
         if($clockingIn) {
-            VisitorClockIn::dispatch($vehicle);
+            VisitorClockIn::dispatch($visitor);
             // dd($clockingIn);
         }
 
