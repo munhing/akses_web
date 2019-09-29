@@ -3,6 +3,7 @@
         <thead>
             <th>Description</th>
         <th>Uuid</th>
+        <th>Visitor Uuid</th>
             <th colspan="3">Action</th>
         </thead>
         <tbody>
@@ -10,6 +11,7 @@
             <tr>
                 <td>{!! $visitorCard->description !!}</td>
             <td>{!! $visitorCard->uuid !!}</td>
+            <td>{!! $visitorCard->visitor_uuid !!}</td>
                 <td>
                     {!! Form::open(['route' => ['visitorCards.destroy', $visitorCard->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

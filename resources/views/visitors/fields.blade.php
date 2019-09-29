@@ -1,3 +1,7 @@
+<div class="form-group col-sm-6">
+    <v-select multiple :options="options"></v-select>
+</div>
+
 <!-- Uuid Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('uuid', 'Uuid:') !!}

@@ -6,6 +6,8 @@ use App\Models\Portuser;
 use App\Events\ClockOut;
 use App\Events\PortuserClockIn;
 
+use App\Services\AksesScanService;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +23,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/', function() {
+    // return $scan->getActivePortusers();
+    dd(app('App\Services\AksesScanService'), app('App\Services\AksesScanService'), app('App\Services\AksesScanService'));
+});
 // Route::apiResource('activeportusers', 'ActivePortuserController');
 
 Route::get('activeportusers', 'ActivePortuserController@index');
@@ -34,3 +40,5 @@ Route::delete('activevehicles', 'ActiveVehicleController@clockOut');
 Route::get('activevisitors', 'ActiveVisitorController@index');
 Route::post('activevisitors', 'ActiveVisitorController@clockIn');
 Route::delete('activevisitors', 'ActiveVisitorController@clockOut');
+
+Route::post('scan', 'ScanController@scan');

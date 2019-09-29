@@ -17,7 +17,7 @@ class CreateVisitorsTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('uuid')->unique();
             $table->string('name', 100);
-            $table->string('nric', 20)->unique();
+            $table->string('nric', 20);
             $table->string('company');
             $table->softDeletes();
             $table->timestamps();

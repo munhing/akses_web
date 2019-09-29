@@ -16,6 +16,18 @@
     <p>{!! $visitorCard->uuid !!}</p>
 </div>
 
+<!-- Visitor Uuid Field -->
+<div class="form-group">
+    {!! Form::label('visitor_uuid', 'Visitor Uuid:') !!}
+    <p>{!! $visitorCard->visitor_uuid !!}</p>
+</div>
+
+<!-- Deleted At Field -->
+<div class="form-group">
+    {!! Form::label('deleted_at', 'Deleted At:') !!}
+    <p>{!! $visitorCard->deleted_at !!}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}

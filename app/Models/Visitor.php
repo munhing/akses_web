@@ -60,5 +60,9 @@ class Visitor extends Model
         'company' => 'required'
     ];
 
+    public function cards()
+    {
+        return $this->hasMany('App\Models\VisitorCard', 'visitor_uuid', 'uuid');
+    } 
     
 }

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class VisitorCard
  * @package App\Models
- * @version September 23, 2019, 5:13 am +08
+ * @version September 28, 2019, 5:04 pm +08
  *
  * @property string description
  * @property string uuid
+ * @property string visitor_uuid
  */
 class VisitorCard extends Model
 {
@@ -28,7 +29,8 @@ class VisitorCard extends Model
 
     public $fillable = [
         'description',
-        'uuid'
+        'uuid',
+        'visitor_uuid'
     ];
 
     /**
@@ -39,7 +41,8 @@ class VisitorCard extends Model
     protected $casts = [
         'id' => 'integer',
         'description' => 'string',
-        'uuid' => 'string'
+        'uuid' => 'string',
+        'visitor_uuid' => 'string'
     ];
 
     /**
@@ -54,6 +57,6 @@ class VisitorCard extends Model
 
     public function visitor()
     {
-        return $this->belongsTo('App\Models\Visitor', 'visitor_uuid', 'uuid');
-    }  
+        return $this->belongsTo('App\Models\Visitor','visitor_uuid', 'uuid');
+    }
 }

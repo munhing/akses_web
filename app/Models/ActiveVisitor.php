@@ -51,10 +51,7 @@ class ActiveVisitor extends Model
         return $this->belongsTo('App\Models\Visitor', 'visitor_uuid', 'uuid');
     }  
     
-    // public function cards()
-    // {
-    //     return $this->hasMany('App\Models\VisitorCard', 'uuid', 'visitor_card_uuid');
-    // } 
+ 
 
     public function card()
     {

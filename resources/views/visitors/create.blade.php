@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div id="app">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
          <a href="{!! route('visitors.index') !!}">Visitor</a>
@@ -29,4 +30,9 @@
                 </div>
            </div>
     </div>
+</div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

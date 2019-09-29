@@ -47,5 +47,3 @@ Route::resource('visitors', 'VisitorController');
 Route::resource('visitorCards', 'VisitorCardController');
 
 Route::resource('activeVisitors', 'ActiveVisitorController');
-
-Route::resource('visitors', 'VisitorController');

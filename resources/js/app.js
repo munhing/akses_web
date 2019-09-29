@@ -9,6 +9,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import BootstrapVue from 'bootstrap-vue' //Importing
+import vSelect from 'vue-select'
+
+import 'vue-select/dist/vue-select.css';
 
 Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 
@@ -34,6 +37,8 @@ Vue.component('vehicle-clock-in-modal', require('./components/VehicleClockInModa
 Vue.component('visitor-list', require('./components/VisitorList.vue').default);
 Vue.component('visitor-card', require('./components/VisitorCard.vue').default);
 Vue.component('visitor-clock-in-modal', require('./components/VisitorClockInModal.vue').default);
+
+Vue.component('v-select', vSelect)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52,7 +57,8 @@ const app = new Vue({
         profiles: [],
         vehicles: [],
         visitors: [],
-        search: ''
+        search: '',
+        options: ['foo', 'bar', 'baz']
     },
 
     computed: {

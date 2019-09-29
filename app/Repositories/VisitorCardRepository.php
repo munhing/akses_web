@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class VisitorCardRepository
  * @package App\Repositories
- * @version September 23, 2019, 5:13 am +08
+ * @version September 28, 2019, 5:04 pm +08
 */
 
 class VisitorCardRepository extends BaseRepository
@@ -18,7 +18,8 @@ class VisitorCardRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'description',
-        'uuid'
+        'uuid',
+        'visitor_uuid'
     ];
 
     /**
