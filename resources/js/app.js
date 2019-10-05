@@ -38,7 +38,10 @@ Vue.component('visitor-list', require('./components/VisitorList.vue').default);
 Vue.component('visitor-card', require('./components/VisitorCard.vue').default);
 Vue.component('visitor-clock-in-modal', require('./components/VisitorClockInModal.vue').default);
 
-Vue.component('v-select', vSelect)
+
+
+Vue.component('v-select', vSelect);
+Vue.component('visitor-registration-modal', require('./components/VisitorRegistrationModal.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -96,6 +99,12 @@ const app = new Vue({
         visitorClockInModal() {
             console.log('Visitor Clock In button was pressed!');
             this.$refs.myVisitorModal.isVisible = true;
+        },
+
+        visitorRegistrationModal() {
+            console.log('Visitor Registration button was pressed!');
+            this.$refs.myVisitorRegistrationModal.isVisible = true;
+            this.$refs.myVisitorRegistrationModal.reloadAvailableVisitorPass();
         },
 
         reloadList() {

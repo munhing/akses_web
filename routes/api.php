@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Models\ActivePortuser;
 use App\Models\Portuser;
+use App\Models\VisitorCard;
 use App\Events\ClockOut;
 use App\Events\PortuserClockIn;
 
@@ -25,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/', function() {
     // return $scan->getActivePortusers();
-    dd(app('App\Services\AksesScanService'), app('App\Services\AksesScanService'), app('App\Services\AksesScanService'));
+    // dd(app('App\Services\AksesScanService'), app('App\Services\AksesScanService'), app('App\Services\AksesScanService'));
 });
 // Route::apiResource('activeportusers', 'ActivePortuserController');
 
@@ -42,3 +43,9 @@ Route::post('activevisitors', 'ActiveVisitorController@clockIn');
 Route::delete('activevisitors', 'ActiveVisitorController@clockOut');
 
 Route::post('scan', 'ScanController@scan');
+
+Route::get('getavailablevisitorpass', function(){
+    return VisitorCard::where('visitor_uuid','=',null)->get();
+});
+
+Route::post('registervisitor', 'ActiveVisitorController@register');

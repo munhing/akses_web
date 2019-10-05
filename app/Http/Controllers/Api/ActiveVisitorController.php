@@ -9,6 +9,7 @@ use App\Models\VisitorCard;
 use App\Models\Visitor;
 use App\Events\VisitorClockOut;
 use App\Events\VisitorClockIn;
+use Str;
 
 class ActiveVisitorController extends Controller
 {
@@ -22,6 +23,46 @@ class ActiveVisitorController extends Controller
         return ActiveVisitor::with(['visitor', 'card'])->orderByDesc('id')->get();
     }
 
+    public function register(Request $request)
+    {
+        // return $request;
+        // reject if visitor pass not selected
+        $form = $request['form'];
+        if (empty($form['card'])) {
+            throw new \Exception('Please assign a visitor pass!');
+        }
+
+       // create the visitor
+       $visitor = new Visitor;
+       $visitor->uuid = Str::uuid();
+       $visitor->name = $form['name'];
+       $visitor->nric = $form['nric'];
+       $visitor->company = $form['company'];
+    //    $visitor->reason = $form['reason'];
+       $visitor->save();
+
+       // clock in the visitor
+       foreach ($form['card'] as $card) {
+
+            // ClockIn the  visitor
+           $clockingIn = new ActiveVisitor;
+           $clockingIn->visitor_card_uuid = $card;
+           $clockingIn->visitor_uuid = $visitor->uuid;
+           $clockingIn->save();    
+
+           // update card to belong to the visitor
+           $pass = VisitorCard::where('uuid', '=', $card)->first();
+           $pass->visitor_uuid = $visitor->uuid;
+           $pass->save();
+       }
+
+       // dispatch event
+       VisitorClockIn::dispatch($visitor);
+
+       return $visitor;
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -31,9 +72,14 @@ class ActiveVisitorController extends Controller
     public function clockOut(Request $request)
     {
         // return $request;
-        $visitorCard = VisitorCard::where('uuid', '=', $request['uuid'])->get();
-        // return $portuser;
+        $visitorCard = VisitorCard::where('uuid', '=', $request['uuid'])->first();
+        // return
+        //  $portuser;
         $clockingOut = ActiveVisitor::where('visitor_card_uuid', '=', $request['uuid'])->delete();
+
+        // update card's visitor_uuid to null
+        $visitorCard->visitor_uuid = null;
+        $visitorCard->save();
         
         if($clockingOut) {
             VisitorClockOut::dispatch($visitorCard);

@@ -2608,6 +2608,117 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorRegistrationModal.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VisitorRegistrationModal.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isVisible: false,
+      form: {
+        name: '',
+        nric: '',
+        company: '',
+        reason: '',
+        card: []
+      },
+      cards: ['Jollibee', 'McDonalds', 'KFC', 'Sugarbun']
+    };
+  },
+  methods: {
+    reloadAvailableVisitorPass: function reloadAvailableVisitorPass() {
+      var _this = this;
+
+      console.log('reloading available visitor pass!');
+      axios.get('/api/getavailablevisitorpass').then(function (response) {
+        _this.cards = response.data;
+      });
+    },
+    resetForm: function resetForm() {
+      this.form.name = '', this.form.nric = '', this.form.company = '', this.form.reason = '', this.form.card = [];
+    },
+    submit: function submit() {
+      var _this2 = this;
+
+      console.log(this.form); // post request
+      // immediately register the person into the active visitor list
+
+      axios.post('/api/registervisitor', {
+        form: this.form
+      }).then(function (response) {
+        console.log(response); // reset the form
+
+        _this2.resetForm(); // close the modal
+
+
+        _this2.isVisible = false;
+      })["catch"](function (error) {
+        console.log(error.response.data.message);
+        alert(error.response.data.message);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -78140,6 +78251,206 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-modal",
+    {
+      attrs: { title: "Visitor Registration", centered: "", "hide-footer": "" },
+      on: {
+        ok: function($event) {
+          _vm.isVisible = false
+        }
+      },
+      model: {
+        value: _vm.isVisible,
+        callback: function($$v) {
+          _vm.isVisible = $$v
+        },
+        expression: "isVisible"
+      }
+    },
+    [
+      _c(
+        "b-form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.submit($event)
+            }
+          }
+        },
+        [
+          _c(
+            "b-form-group",
+            {
+              attrs: { id: "input-group-1", label: "Name", "label-for": "name" }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "name", required: "", placeholder: "Enter name" },
+                model: {
+                  value: _vm.form.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "name", $$v)
+                  },
+                  expression: "form.name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: { id: "input-group-1", label: "NRIC", "label-for": "nric" }
+            },
+            [
+              _c("b-form-input", {
+                attrs: {
+                  id: "nric",
+                  required: "",
+                  placeholder: "IC or Passport Number"
+                },
+                model: {
+                  value: _vm.form.nric,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "nric", $$v)
+                  },
+                  expression: "form.nric"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "input-group-1",
+                label: "Company",
+                "label-for": "company"
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "company", required: "", placeholder: "Company" },
+                model: {
+                  value: _vm.form.company,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "company", $$v)
+                  },
+                  expression: "form.company"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "input-group-1",
+                label: "Reason for visit",
+                "label-for": "reason"
+              }
+            },
+            [
+              _c("b-form-textarea", {
+                attrs: {
+                  id: "reason",
+                  placeholder: "Reason to visit",
+                  rows: "3",
+                  "max-rows": "6"
+                },
+                model: {
+                  value: _vm.form.reason,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "reason", $$v)
+                  },
+                  expression: "form.reason"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "input-group-1",
+                label: "Assign visitior pass",
+                "label-for": "pass"
+              }
+            },
+            [
+              _c("v-select", {
+                attrs: {
+                  id: "card",
+                  multiple: "",
+                  options: _vm.cards,
+                  reduce: function(description) {
+                    return description.uuid
+                  },
+                  label: "description"
+                },
+                model: {
+                  value: _vm.form.card,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "card", $$v)
+                  },
+                  expression: "form.card"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-button",
+            {
+              staticClass: "mt-3",
+              attrs: {
+                size: "lg",
+                block: "",
+                type: "submit",
+                variant: "success"
+              }
+            },
+            [_vm._v("Register")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -90366,6 +90677,7 @@ Vue.component('visitor-list', __webpack_require__(/*! ./components/VisitorList.v
 Vue.component('visitor-card', __webpack_require__(/*! ./components/VisitorCard.vue */ "./resources/js/components/VisitorCard.vue")["default"]);
 Vue.component('visitor-clock-in-modal', __webpack_require__(/*! ./components/VisitorClockInModal.vue */ "./resources/js/components/VisitorClockInModal.vue")["default"]);
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_1___default.a);
+Vue.component('visitor-registration-modal', __webpack_require__(/*! ./components/VisitorRegistrationModal.vue */ "./resources/js/components/VisitorRegistrationModal.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -90419,6 +90731,11 @@ var app = new Vue({
     visitorClockInModal: function visitorClockInModal() {
       console.log('Visitor Clock In button was pressed!');
       this.$refs.myVisitorModal.isVisible = true;
+    },
+    visitorRegistrationModal: function visitorRegistrationModal() {
+      console.log('Visitor Registration button was pressed!');
+      this.$refs.myVisitorRegistrationModal.isVisible = true;
+      this.$refs.myVisitorRegistrationModal.reloadAvailableVisitorPass();
     },
     reloadList: function reloadList() {
       var _this4 = this;
@@ -91112,6 +91429,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorList_vue_vue_type_template_id_04707711___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorList_vue_vue_type_template_id_04707711___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/VisitorRegistrationModal.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/VisitorRegistrationModal.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VisitorRegistrationModal_vue_vue_type_template_id_fdd4a1de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de& */ "./resources/js/components/VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de&");
+/* harmony import */ var _VisitorRegistrationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitorRegistrationModal.vue?vue&type=script&lang=js& */ "./resources/js/components/VisitorRegistrationModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VisitorRegistrationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VisitorRegistrationModal_vue_vue_type_template_id_fdd4a1de___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VisitorRegistrationModal_vue_vue_type_template_id_fdd4a1de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VisitorRegistrationModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/VisitorRegistrationModal.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/VisitorRegistrationModal.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorRegistrationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VisitorRegistrationModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorRegistrationModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorRegistrationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorRegistrationModal_vue_vue_type_template_id_fdd4a1de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorRegistrationModal.vue?vue&type=template&id=fdd4a1de&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorRegistrationModal_vue_vue_type_template_id_fdd4a1de___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorRegistrationModal_vue_vue_type_template_id_fdd4a1de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
