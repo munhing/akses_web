@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveVisitor;
+use App\Models\VisitorActivity;
 use App\Models\VisitorCard;
 use App\Models\Visitor;
 use App\Events\VisitorClockOut;
@@ -48,8 +49,12 @@ class ActiveVisitorController extends Controller
            $clockingIn = new ActiveVisitor;
            $clockingIn->visitor_card_uuid = $card;
            $clockingIn->visitor_uuid = $visitor->uuid;
-           $clockingIn->save();    
+           $clockingIn->reason = $form['reason'];
+           $clockingIn->save();
 
+           // insert into visitor_activities
+           $this->logActivity($visitor->uuid, $card, 1, $form['reason']);
+           
            // update card to belong to the visitor
            $pass = VisitorCard::where('uuid', '=', $card)->first();
            $pass->visitor_uuid = $visitor->uuid;
@@ -73,6 +78,7 @@ class ActiveVisitorController extends Controller
     {
         // return $request;
         $visitorCard = VisitorCard::where('uuid', '=', $request['uuid'])->first();
+        $visitorUuid = $visitorCard->visitor_uuid;
         // return
         //  $portuser;
         $clockingOut = ActiveVisitor::where('visitor_card_uuid', '=', $request['uuid'])->delete();
@@ -80,6 +86,9 @@ class ActiveVisitorController extends Controller
         // update card's visitor_uuid to null
         $visitorCard->visitor_uuid = null;
         $visitorCard->save();
+
+        // insert into visitor_activities
+        $this->logActivity($visitorUuid, $request['uuid']);     
         
         if($clockingOut) {
             VisitorClockOut::dispatch($visitorCard);
@@ -87,6 +96,17 @@ class ActiveVisitorController extends Controller
 
         return $clockingOut;
     }  
+
+    public function logActivity($visitorUuid, $cardUui, $clockType = 0, $reason = null) {
+    
+        $activity = new VisitorActivity;
+        $activity->visitor_uuid = $visitorUuid;
+        $activity->visitor_card_uuid = $cardUui;
+        $activity->clock_type = $clockType;
+        $activity->reason = $reason;
+        $activity->save();
+
+    }
 
         /**
      * Store a newly created resource in storage.

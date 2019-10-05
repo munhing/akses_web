@@ -37,3 +37,12 @@
 <li class="nav-item {{ Request::is('visitorCards*') ? 'active' : '' }}">
     <a class="nav-link" href="{!! route('visitorCards.index') !!}"><i class="nav-icon icon-cursor"></i><span>Visitor Pass</span></a>
 </li>
+<li class="nav-item {{ Request::is('visitorActivities*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('visitorActivities.index') !!}"><i class="nav-icon icon-cursor"></i><span>VisitorActivities</span></a>
+</li>
+<li class="nav-item {{ Request::is('vehicleActivities*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('vehicleActivities.index') !!}"><i class="nav-icon icon-cursor"></i><span>VehicleActivities</span></a>
+</li>
+<li class="nav-item {{ Request::is('portuserActivities*') ? 'active' : '' }}">
+    <a class="nav-link" href="{!! route('portuserActivities.index') !!}"><i class="nav-icon icon-cursor"></i><span>PortuserActivities</span></a>
+</li>
