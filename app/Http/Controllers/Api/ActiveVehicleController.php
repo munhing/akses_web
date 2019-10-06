@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveVehicle;
 use App\Models\Vehicle;
+use App\Models\VehicleActivity;
 use App\Events\VehicleClockOut;
 use App\Events\VehicleClockIn;
 
@@ -21,6 +22,14 @@ class ActiveVehicleController extends Controller
         return ActiveVehicle::with(['vehicle', 'vehicle.company', 'vehicle.type'])->orderByDesc('id')->get();
     }
 
+    public function logVehicleActivity($uuid, $clockType = 0) {
+    
+        $activity = new VehicleActivity;
+        $activity->vehicle_uuid = $uuid;
+        $activity->clock_type = $clockType;
+        $activity->save();
+
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -35,6 +44,7 @@ class ActiveVehicleController extends Controller
         $clockingOut = ActiveVehicle::where('vehicle_uuid', '=', $request['uuid'])->delete();
         
         if($clockingOut) {
+            $this->logVehicleActivity($request['uuid']);
             VehicleClockOut::dispatch($vehicle);
         }
 
@@ -60,6 +70,7 @@ class ActiveVehicleController extends Controller
         $clockingIn->save();
         
         if($clockingIn) {
+            $this->logVehicleActivity($request['uuid'], 1);
             VehicleClockIn::dispatch($vehicle);
             // dd($clockingIn);
         }

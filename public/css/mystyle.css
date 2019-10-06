@@ -18,6 +18,44 @@
   text-align: center;
 }
 
+.card-bg-icon-portusers::after {
+  position: absolute;
+  content: "\e001";
+  font-family: simple-line-icons;
+  opacity: 0.5;
+  font-size: 5rem;
+  top: 10%;
+  right: 10%;
+  z-index: 0;
+}
+
+.card-bg-icon-vehicles::after {
+  position: absolute;
+  content: "\f1b9";
+  font-family: FontAwesome;
+  opacity: 0.5;
+  font-size: 5rem;
+  top: 10%;
+  right: 10%;
+  z-index: 0;
+}
+
+
+
+.card-bg-icon-visitors::after {
+  position: absolute;
+  content: "\f0c0";
+  font-family: FontAwesome;
+  opacity: 0.5;
+  font-size: 5rem;
+  top: 10%;
+  right: 10%;
+  z-index: 0;
+}
+
+.large {font-size:1.5rem;font-weight:bold}
+.larger {font-size:4rem;font-weight:bold}
+
 @media (min-width: 480px) {
     .container {
       max-width: 456px;

@@ -7,6 +7,7 @@ use App\Events\ClockOut;
 use App\Events\ClockIn;
 use App\Events\PortuserClockIn;
 use App\Models\Portuser;
+use App\Models\PortuserActivity;
 use App\Models\ActivePortuser;
 
 class AksesScanService
@@ -17,6 +18,14 @@ class AksesScanService
         return ActivePortuser::with(['portuser', 'portuser.media', 'portuser.company'])->orderByDesc('id')->get();
     }
 
+    public function logPortuserActivity($uuid, $clockType = 0) {
+    
+        $activity = new PortuserActivity;
+        $activity->portuser_uuid = $uuid;
+        $activity->clock_type = $clockType;
+        $activity->save();
+
+    }
 
     public function clockIn(Request $request)
     {
@@ -31,6 +40,7 @@ class AksesScanService
         $clockingIn->save();
         
         if($clockingIn) {
+            $this->logPortuserActivity($request['uuid'], 1);
             ClockIn::dispatch($portuser);
         }
 
@@ -45,6 +55,7 @@ class AksesScanService
         $clockingOut = ActivePortuser::where('portuser_uuid', '=', $request['uuid'])->delete();
         
         if($clockingOut) {
+            $this->logPortuserActivity($request['uuid']);
             ClockOut::dispatch($portuser);
         }
 
