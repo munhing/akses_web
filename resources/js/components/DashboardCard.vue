@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
         <div class="card text-white" v-bind:class="applyClassType">
             <div class="card-body pb-0">
                 <div class="text-value larger">

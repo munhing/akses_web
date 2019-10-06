@@ -77833,7 +77833,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-sm-6 col-lg-3" }, [
+  return _c("div", { staticClass: "col-sm-6 col-lg-4" }, [
     _c("div", { staticClass: "card text-white", class: _vm.applyClassType }, [
       _c("div", { staticClass: "card-body pb-0" }, [
         _c(
