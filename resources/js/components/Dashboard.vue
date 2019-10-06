@@ -1,8 +1,8 @@
 <template>
     <div class="row"> 
-        <dashboard-card :count="portuserCount" classType="portuser">Port Users</dashboard-card>
-        <dashboard-card :count="vehicleCount" classType="vehicle">Vehicles</dashboard-card>
-        <dashboard-card :count="visitorCount" classType="visitor">Visitors</dashboard-card>
+        <dashboard-card :count="portuserCount" :url="urlActivePortusers" classType="portuser">Port Users</dashboard-card>
+        <dashboard-card :count="vehicleCount" :url="urlActiveVehicles" classType="vehicle">Vehicles</dashboard-card>
+        <dashboard-card :count="visitorCount" :url="urlActiveVisitors" classType="visitor">Visitors</dashboard-card>
     </div>
 </template>
 
@@ -14,7 +14,10 @@
                 portuserCount: 0,
                 vehicleCount: 0,
                 visitorCount: 0,
-
+                urlActivePortusers: '/activePortusers',
+                urlActiveVehicles: '/activeVehicles',
+                urlActiveVisitors: '/activeVisitors',
+                hostname: window.location.hostname
             }; 
         },
 

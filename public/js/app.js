@@ -1945,7 +1945,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       portuserCount: 0,
       vehicleCount: 0,
-      visitorCount: 0
+      visitorCount: 0,
+      urlActivePortusers: '/activePortusers',
+      urlActiveVehicles: '/activeVehicles',
+      urlActiveVisitors: '/activeVisitors',
+      hostname: window.location.hostname
     };
   },
   methods: {
@@ -2035,8 +2039,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['count', 'classType'],
+  props: ['count', 'classType', 'url'],
   data: function data() {
     return {
       duration: 1000
@@ -77768,19 +77774,37 @@ var render = function() {
     [
       _c(
         "dashboard-card",
-        { attrs: { count: _vm.portuserCount, classType: "portuser" } },
+        {
+          attrs: {
+            count: _vm.portuserCount,
+            url: _vm.urlActivePortusers,
+            classType: "portuser"
+          }
+        },
         [_vm._v("Port Users")]
       ),
       _vm._v(" "),
       _c(
         "dashboard-card",
-        { attrs: { count: _vm.vehicleCount, classType: "vehicle" } },
+        {
+          attrs: {
+            count: _vm.vehicleCount,
+            url: _vm.urlActiveVehicles,
+            classType: "vehicle"
+          }
+        },
         [_vm._v("Vehicles")]
       ),
       _vm._v(" "),
       _c(
         "dashboard-card",
-        { attrs: { count: _vm.visitorCount, classType: "visitor" } },
+        {
+          attrs: {
+            count: _vm.visitorCount,
+            url: _vm.urlActiveVisitors,
+            classType: "visitor"
+          }
+        },
         [_vm._v("Visitors")]
       )
     ],
@@ -77829,12 +77853,14 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-3 mx-3", staticStyle: { height: "50px" } }, [
-        _c(
-          "div",
-          { staticClass: "text-uppercase large" },
-          [_vm._t("default")],
-          2
-        )
+        _c("div", { staticClass: "text-uppercase large" }, [
+          _c(
+            "a",
+            { staticStyle: { color: "white" }, attrs: { href: _vm.url } },
+            [_vm._t("default")],
+            2
+          )
+        ])
       ])
     ])
   ])

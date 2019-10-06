@@ -12,7 +12,9 @@
             </div>
             <div class="mt-3 mx-3" style="height:50px;">
                 <div class="text-uppercase large">
-                    <slot></slot>
+                    <a :href="url" style="color:white">
+                        <slot></slot>
+                    </a>
                 </div>
             </div>
         </div>
@@ -22,7 +24,7 @@
 <script>
     export default {
 
-        props: ['count', 'classType'],
+        props: ['count', 'classType', 'url'],
 
         data() {
             return {
