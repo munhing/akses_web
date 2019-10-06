@@ -12,6 +12,7 @@ import BootstrapVue from 'bootstrap-vue' //Importing
 import vSelect from 'vue-select'
 
 import 'vue-select/dist/vue-select.css';
+import AnimatedNumber from "animated-number-vue";
 
 Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 
@@ -41,7 +42,12 @@ Vue.component('visitor-clock-in-modal', require('./components/VisitorClockInModa
 
 
 Vue.component('v-select', vSelect);
+Vue.component('animated-number', AnimatedNumber);
+
 Vue.component('visitor-registration-modal', require('./components/VisitorRegistrationModal.vue').default);
+
+Vue.component('dashboard', require('./components/Dashboard.vue').default);
+Vue.component('dashboard-card', require('./components/DashboardCard.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

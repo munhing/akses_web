@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use App\Models\ActivePortuser;
+use App\Models\ActiveVehicle;
+use App\Models\ActiveVisitor;
 use App\Models\Portuser;
 use App\Models\VisitorCard;
 use App\Events\ClockOut;
@@ -46,6 +48,18 @@ Route::post('scan', 'ScanController@scan');
 
 Route::get('getavailablevisitorpass', function(){
     return VisitorCard::where('visitor_uuid','=',null)->get();
+});
+
+Route::get('getactiveportuserscount', function(){
+    return ActivePortuser::count();
+});
+
+Route::get('getactivevehiclescount', function(){
+    return ActiveVehicle::count();
+});
+
+Route::get('getactivevisitorscount', function(){
+    return ActiveVisitor::count();
 });
 
 Route::post('registervisitor', 'ActiveVisitorController@register');
