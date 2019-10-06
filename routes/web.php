@@ -13,43 +13,46 @@ use App\Events\PortuserClockIn;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return route('dashboard');
+    return redirect()->route('login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function () {
 
-Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::resource('users', 'UserController');
+    Route::resource('users', 'UserController');
 
-Route::resource('companies', 'CompanyController');
+    Route::resource('companies', 'CompanyController');
 
-Route::resource('roles', 'RoleController');
+    Route::resource('roles', 'RoleController');
 
-Route::resource('portusers', 'PortuserController');
+    Route::resource('portusers', 'PortuserController');
 
-Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name('portusers.show_qrcode');
+    Route::get('portusers/{portuser}/qrcode', 'PortuserController@showQrcode')->name('portusers.show_qrcode');
 
-Route::resource('monitors', 'MonitorController');
+    Route::resource('monitors', 'MonitorController');
 
-Route::resource('activePortusers', 'ActivePortuserController');
+    Route::resource('activePortusers', 'ActivePortuserController');
 
-Route::resource('vehicles', 'VehicleController');
+    Route::resource('vehicles', 'VehicleController');
 
-Route::resource('vehicleTypes', 'VehicleTypeController');
+    Route::resource('vehicleTypes', 'VehicleTypeController');
 
-Route::resource('activeVehicles', 'ActiveVehicleController');
+    Route::resource('activeVehicles', 'ActiveVehicleController');
 
-Route::resource('visitors', 'VisitorController');
+    Route::resource('visitors', 'VisitorController');
 
-Route::resource('visitorCards', 'VisitorCardController');
+    Route::resource('visitorCards', 'VisitorCardController');
 
-Route::resource('activeVisitors', 'ActiveVisitorController');
+    Route::resource('activeVisitors', 'ActiveVisitorController');
 
-Route::resource('visitorActivities', 'VisitorActivityController');
+    Route::resource('visitorActivities', 'VisitorActivityController');
 
-Route::resource('vehicleActivities', 'VehicleActivityController');
+    Route::resource('vehicleActivities', 'VehicleActivityController');
 
-Route::resource('portuserActivities', 'PortuserActivityController');
+    Route::resource('portuserActivities', 'PortuserActivityController');
+
+});

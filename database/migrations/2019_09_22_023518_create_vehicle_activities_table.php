@@ -17,7 +17,7 @@ class CreateVehicleActivitiesTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('vehicle_uuid');
             $table->integer('clock_type');
-            $table->dateTime('clock_time');
+            $table->timestamps();
         });
     }
 
