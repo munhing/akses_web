@@ -138,3 +138,19 @@ const app = new Vue({
         },              
     }
 });
+
+const header = new Vue({
+    el: '#navbar',
+   
+    data: {
+        msg: 'Header Vue Component'
+    },
+
+    methods: {
+        visitorRegistrationModal() {
+            console.log('Visitor Registration button was pressed!');
+            this.$refs.myVisitorRegistrationModal.isVisible = true;
+            this.$refs.myVisitorRegistrationModal.reloadAvailableVisitorPass();
+        },
+    }
+});

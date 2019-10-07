@@ -4,7 +4,7 @@
     <div id="app">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Active Visitors</li>
-            <li class="breadcrumb-menu d-md-down-none">
+            <li class="breadcrumb-menu">
                 <div class="btn-group" role="group" aria-label="Button group">
                     <b-form inline>
                         <label class="sr-only" for="inline-form-input-name">Filter</label>
