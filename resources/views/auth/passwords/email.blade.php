@@ -51,7 +51,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-6 offset-6">
+                                <div class="col-6">
+                                    <a href="{{ route('login') }}" class="btn btn-outline-primary">Back to Login Page</a>
+                                </div>                            
+                                <div class="col-6">
                                     <button class="btn btn-block btn-primary" type="submit">
                                         <i class="fa fa-btn fa-envelope"></i> Send Password Reset Link
                                     </button>

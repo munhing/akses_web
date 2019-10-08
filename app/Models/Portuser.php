@@ -70,11 +70,25 @@ class Portuser extends Model implements HasMedia
 
     public function registerMediaCollections()
     {
-        $this->addMediaConversion('thumb')
-            ->width(250)
-            ->height(250)
-            ->sharpen(10);
+        // $this
+        //     ->addMediaConversion('avatar')
+        //     ->singleFile();
 
+        // $this->addMediaConversion('thumb')
+        //     ->width(250)
+        //     ->height(250)
+        //     ->sharpen(10);
+
+        $this
+            ->addMediaCollection('photos')
+            ->singleFile()
+            ->registerMediaConversions(function (Media $media) {
+                $this
+                    ->addMediaConversion('thumb')
+                    ->width(250)
+                    ->height(250)
+                    ->sharpen(10);
+            });        
     }
     
 }

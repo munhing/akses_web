@@ -37,9 +37,6 @@ Vue.component('vehicle-clock-in-modal', require('./components/VehicleClockInModa
 
 Vue.component('visitor-list', require('./components/VisitorList.vue').default);
 Vue.component('visitor-card', require('./components/VisitorCard.vue').default);
-Vue.component('visitor-clock-in-modal', require('./components/VisitorClockInModal.vue').default);
-
-
 
 Vue.component('v-select', vSelect);
 Vue.component('animated-number', AnimatedNumber);
@@ -100,17 +97,6 @@ const app = new Vue({
         vehicleClockInModal() {
             console.log('Vehicle Clock In button was pressed!');
             this.$refs.myVehicleModal.isVisible = true;
-        },
-
-        visitorClockInModal() {
-            console.log('Visitor Clock In button was pressed!');
-            this.$refs.myVisitorModal.isVisible = true;
-        },
-
-        visitorRegistrationModal() {
-            console.log('Visitor Registration button was pressed!');
-            this.$refs.myVisitorRegistrationModal.isVisible = true;
-            this.$refs.myVisitorRegistrationModal.reloadAvailableVisitorPass();
         },
 
         reloadList() {

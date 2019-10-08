@@ -15,12 +15,7 @@
                         v-model="search"
                         ></b-input>
                     </b-form>
-                    <a class="btn" href="#" @click.prevent="visitorRegistrationModal">
-                        Visitor Registration
-                    </a>                    
-                    <a class="btn" href="#" @click.prevent="visitorClockInModal">
-                        <i class="fa fa-sign-out"></i> Clock In
-                    </a>
+
                 </div>
             </li>        
         </ol>
@@ -28,14 +23,8 @@
             <div class="animated fadeIn">
                 @include('flash::message')
                 <visitor-list></visitor-list>
-                <visitor-clock-in-modal ref="myVisitorModal"></visitor-clock-in-modal>
-                <visitor-registration-modal ref="myVisitorRegistrationModal"></visitor-registration-modal>
             </div>
         </div>
     </div>
     
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

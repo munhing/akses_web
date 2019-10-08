@@ -2565,78 +2565,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorClockInModal.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VisitorClockInModal.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      isVisible: false,
-      form: {
-        visitorCardUuid: '',
-        visitorUuid: ''
-      }
-    };
-  },
-  methods: {
-    clockIn: function clockIn(e) {
-      var _this = this;
-
-      e.preventDefault(); // make an ajax call to clock in a port user
-      // send a post request to clock In
-
-      axios.post('/api/activevisitors', {
-        card_uuid: this.form.visitorCardUuid,
-        visitor_uuid: this.form.visitorUuid
-      }).then(function (response) {
-        console.log(response);
-
-        _this.$root.reloadVisitorList();
-      })["catch"](function (error) {
-        console.log(error);
-      }); // this.removeProfile(id);
-      // get call to get the latest listing
-
-      console.log('Visitor with card uuid: ' + this.form.visitorCardUuid + ' clock in!');
-      this.isVisible = false;
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorList.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VisitorList.vue?vue&type=script&lang=js& ***!
@@ -78306,132 +78234,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorClockInModal.vue?vue&type=template&id=72b07a0d&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VisitorClockInModal.vue?vue&type=template&id=72b07a0d& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "b-modal",
-    {
-      attrs: {
-        title: "Modal title",
-        centered: "",
-        size: "sm",
-        "hide-header": "",
-        "hide-footer": ""
-      },
-      on: {
-        ok: function($event) {
-          _vm.isVisible = false
-        }
-      },
-      model: {
-        value: _vm.isVisible,
-        callback: function($$v) {
-          _vm.isVisible = $$v
-        },
-        expression: "isVisible"
-      }
-    },
-    [
-      _c(
-        "b-form",
-        { on: { submit: _vm.clockIn } },
-        [
-          _c(
-            "b-form-group",
-            {
-              attrs: {
-                id: "input-group-1",
-                label: "Visitor Card Uuid",
-                "label-for": "visitor_card_uuid"
-              }
-            },
-            [
-              _c("b-form-input", {
-                attrs: {
-                  id: "visitor_card_uuid",
-                  required: "",
-                  placeholder: "Enter Visitor Card Uuid"
-                },
-                model: {
-                  value: _vm.form.visitorCardUuid,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "visitorCardUuid", $$v)
-                  },
-                  expression: "form.visitorCardUuid"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-form-group",
-            {
-              attrs: {
-                id: "input-group-1",
-                label: "Visitor Uuid",
-                "label-for": "visitor_uuid"
-              }
-            },
-            [
-              _c("b-form-input", {
-                attrs: {
-                  id: "visitor_uuid",
-                  required: "",
-                  placeholder: "Enter Visitor Uuid"
-                },
-                model: {
-                  value: _vm.form.visitorUuid,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "visitorUuid", $$v)
-                  },
-                  expression: "form.visitorUuid"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-button",
-            {
-              staticClass: "mt-3",
-              attrs: {
-                size: "lg",
-                block: "",
-                type: "submit",
-                variant: "success"
-              }
-            },
-            [_vm._v("Clock In")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorList.vue?vue&type=template&id=04707711&":
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VisitorList.vue?vue&type=template&id=04707711& ***!
@@ -90958,7 +90760,6 @@ Vue.component('vehicle-card', __webpack_require__(/*! ./components/VehicleCard.v
 Vue.component('vehicle-clock-in-modal', __webpack_require__(/*! ./components/VehicleClockInModal.vue */ "./resources/js/components/VehicleClockInModal.vue")["default"]);
 Vue.component('visitor-list', __webpack_require__(/*! ./components/VisitorList.vue */ "./resources/js/components/VisitorList.vue")["default"]);
 Vue.component('visitor-card', __webpack_require__(/*! ./components/VisitorCard.vue */ "./resources/js/components/VisitorCard.vue")["default"]);
-Vue.component('visitor-clock-in-modal', __webpack_require__(/*! ./components/VisitorClockInModal.vue */ "./resources/js/components/VisitorClockInModal.vue")["default"]);
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.component('animated-number', animated_number_vue__WEBPACK_IMPORTED_MODULE_3___default.a);
 Vue.component('visitor-registration-modal', __webpack_require__(/*! ./components/VisitorRegistrationModal.vue */ "./resources/js/components/VisitorRegistrationModal.vue")["default"]);
@@ -91013,15 +90814,6 @@ var app = new Vue({
     vehicleClockInModal: function vehicleClockInModal() {
       console.log('Vehicle Clock In button was pressed!');
       this.$refs.myVehicleModal.isVisible = true;
-    },
-    visitorClockInModal: function visitorClockInModal() {
-      console.log('Visitor Clock In button was pressed!');
-      this.$refs.myVisitorModal.isVisible = true;
-    },
-    visitorRegistrationModal: function visitorRegistrationModal() {
-      console.log('Visitor Registration button was pressed!');
-      this.$refs.myVisitorRegistrationModal.isVisible = true;
-      this.$refs.myVisitorRegistrationModal.reloadAvailableVisitorPass();
     },
     reloadList: function reloadList() {
       var _this4 = this;
@@ -91728,75 +91520,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorCard_vue_vue_type_template_id_98848efa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorCard_vue_vue_type_template_id_98848efa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/VisitorClockInModal.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/VisitorClockInModal.vue ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _VisitorClockInModal_vue_vue_type_template_id_72b07a0d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitorClockInModal.vue?vue&type=template&id=72b07a0d& */ "./resources/js/components/VisitorClockInModal.vue?vue&type=template&id=72b07a0d&");
-/* harmony import */ var _VisitorClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitorClockInModal.vue?vue&type=script&lang=js& */ "./resources/js/components/VisitorClockInModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _VisitorClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _VisitorClockInModal_vue_vue_type_template_id_72b07a0d___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _VisitorClockInModal_vue_vue_type_template_id_72b07a0d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/VisitorClockInModal.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/VisitorClockInModal.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/VisitorClockInModal.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VisitorClockInModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorClockInModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorClockInModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/VisitorClockInModal.vue?vue&type=template&id=72b07a0d&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/VisitorClockInModal.vue?vue&type=template&id=72b07a0d& ***!
-  \****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorClockInModal_vue_vue_type_template_id_72b07a0d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VisitorClockInModal.vue?vue&type=template&id=72b07a0d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VisitorClockInModal.vue?vue&type=template&id=72b07a0d&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorClockInModal_vue_vue_type_template_id_72b07a0d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitorClockInModal_vue_vue_type_template_id_72b07a0d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

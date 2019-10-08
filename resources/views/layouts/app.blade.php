@@ -81,6 +81,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <script src="{{ asset('vendor/@coreui/coreui-pro/dist/js/coreui.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/tooltips.js') }}"></script>
 
 @yield('myscripts')
