@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div id="app">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Portusers</li>
     </ol>
@@ -16,7 +17,7 @@
                              <a class="pull-right" href="{!! route('portusers.create') !!}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
                          <div class="card-body">
-                             @include('portusers.table')
+                             @include('portusers.table2')
                               <div class="pull-right mr-3">
                                      
                               </div>
@@ -26,5 +27,6 @@
              </div>
          </div>
     </div>
+</div>
 @endsection
 

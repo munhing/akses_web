@@ -14,8 +14,12 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 import AnimatedNumber from "animated-number-vue";
 
-Vue.use(BootstrapVue) // Telling Vue to use this in whole application
+import 'mdbvue/build/css/mdb.css';
+import { mdbDatatable, mdbContainer } from 'mdbvue';
 
+Vue.use(BootstrapVue) // Telling Vue to use this in whole application
+Vue.use(mdbDatatable);
+Vue.use(mdbContainer);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -26,6 +30,11 @@ Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+
+Vue.component('v-select', vSelect);
+Vue.component('animated-number', AnimatedNumber);
+Vue.component('mdb-datatable', mdbDatatable);
+Vue.component('mdb-container', mdbContainer);
 
 Vue.component('profile-list', require('./components/ProfileList.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
@@ -38,13 +47,12 @@ Vue.component('vehicle-clock-in-modal', require('./components/VehicleClockInModa
 Vue.component('visitor-list', require('./components/VisitorList.vue').default);
 Vue.component('visitor-card', require('./components/VisitorCard.vue').default);
 
-Vue.component('v-select', vSelect);
-Vue.component('animated-number', AnimatedNumber);
-
 Vue.component('visitor-registration-modal', require('./components/VisitorRegistrationModal.vue').default);
 
 Vue.component('dashboard', require('./components/Dashboard.vue').default);
 Vue.component('dashboard-card', require('./components/DashboardCard.vue').default);
+
+Vue.component('mydata-table', require('./components/MydataTable.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
