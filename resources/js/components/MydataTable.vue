@@ -1,6 +1,7 @@
 <template>
     <mdb-container>
         <mdb-datatable
+            responsive
             :data="data"
             striped
             bordered
