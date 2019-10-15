@@ -64,7 +64,9 @@ Route::get('getactivevisitorscount', function(){
 
 Route::post('registervisitor', 'ActiveVisitorController@register');
 
-Route::get('portusers', function(){
-    // return Portuser::with('company')->paginate(25);
-    return Portuser::with('company')->get();
-});
+Route::get('portusers', 'PortuserController@getPortusers');
+
+// Route::get('portusers', function(){
+//     // return Portuser::with('company')->paginate(25);
+//     return Portuser::with('company')->get();
+// });

@@ -61,7 +61,7 @@
 
 @media (min-width: 480px) {
     .container {
-      max-width: 456px;
+      /* max-width: 456px; */
     }
 }
 

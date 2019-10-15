@@ -5,7 +5,7 @@
             striped
             bordered
             arrows
-            :display="3"
+            :display="5"
         />
     </mdb-container>
 </template>
