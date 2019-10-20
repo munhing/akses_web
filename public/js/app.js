@@ -101443,7 +101443,9 @@ var render = function() {
                   columns: _vm.columns,
                   data: _vm.data,
                   options: _vm.options,
-                  id: "dataTable"
+                  id: "dataTable",
+                  small: "",
+                  fixed: ""
                 },
                 scopedSlots: _vm._u([
                   {

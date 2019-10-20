@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>{{config('app.name')}}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
     <!-- Ionicons -->
@@ -70,6 +72,8 @@
     </div>
 </footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{{ asset('vendor/@coreui/coreui-pro/dist/js/coreui.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 </html>
