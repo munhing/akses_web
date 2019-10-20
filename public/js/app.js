@@ -2521,6 +2521,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     openWindow: function openWindow(url) {
       window.open(url, 'QRCode', 'resizable,height=500,width=400'); // this.myModal = true;
+    },
+    "goto": function goto(url) {
+      window.open(url, '_self'); // this.myModal = true;
     }
   },
   mounted: function mounted() {
@@ -37954,7 +37957,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#dataTable {\n  width: 95%;\n  margin: 0 auto;\n}\n#dataTable .VuePagination {\n  text-align: center;\n  justify-content: center;\n}\n#dataTable .vue-title {\n  text-align: center;\n  margin-bottom: 10px;\n}\n#dataTable .VueTables__search-field {\n  display: flex;\n}\n#dataTable .VueTables__search-field input {\n  margin-left: 0.25rem;\n}\n#dataTable .VueTables__limit-field {\n  display: flex;\n}\n#dataTable .VueTables__limit-field select {\n  margin-left: 0.25rem !important;\n}\n#dataTable .VueTables__table th {\n  text-align: center;\n}\n#dataTable .VueTables__child-row-toggler {\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  display: block;\n  margin: auto;\n  text-align: center;\n}\n#dataTable .VueTables__child-row-toggler--closed::before {\n  content: \"+\";\n}\n#dataTable .VueTables__child-row-toggler--open::before {\n  content: \"-\";\n}", ""]);
+exports.push([module.i, "#dataTable {\n  width: 100%;\n  margin: 0 auto;\n}\n#dataTable .VuePagination {\n  text-align: center;\n  justify-content: center;\n}\n#dataTable .vue-title {\n  text-align: center;\n  margin-bottom: 10px;\n}\n#dataTable .VueTables__search-field {\n  display: flex;\n}\n#dataTable .VueTables__search-field input {\n  margin-left: 0.25rem;\n}\n#dataTable .VueTables__limit-field {\n  display: flex;\n}\n#dataTable .VueTables__limit-field select {\n  margin-left: 0.25rem !important;\n}\n#dataTable .VueTables__table th {\n  text-align: center;\n}\n#dataTable .VueTables__child-row-toggler {\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  display: block;\n  margin: auto;\n  text-align: center;\n}\n#dataTable .VueTables__child-row-toggler--closed::before {\n  content: \"+\";\n}\n#dataTable .VueTables__child-row-toggler--open::before {\n  content: \"-\";\n}", ""]);
 
 // exports
 
@@ -101413,25 +101416,29 @@ var render = function() {
         [
           _c("b-card-header", [
             _c("i", { staticClass: "icon-menu mr-1" }),
-            _vm._v("Data Table\n      "),
-            _c("div", { staticClass: "card-header-actions" }, [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://github.com/matfish2/vue-tables-2",
-                    rel: "noopener noreferrer",
-                    target: "_blank",
-                    className: "card-header-action"
-                  }
-                },
-                [
-                  _c("small", { attrs: { className: "text-muted" } }, [
-                    _vm._v("docs")
-                  ])
-                ]
-              )
-            ])
+            _vm._v("Portusers\n      "),
+            _c(
+              "div",
+              { staticClass: "card-header-actions" },
+              [
+                _c(
+                  "b-button",
+                  {
+                    attrs: { size: "sm", variant: "link" },
+                    on: {
+                      click: function($event) {
+                        return _vm.goto("/portusers/create")
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "nav-icon icon-people" }),
+                    _vm._v(" New Portuser")
+                  ]
+                )
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -101443,9 +101450,7 @@ var render = function() {
                   columns: _vm.columns,
                   data: _vm.data,
                   options: _vm.options,
-                  id: "dataTable",
-                  small: "",
-                  fixed: ""
+                  id: "dataTable"
                 },
                 scopedSlots: _vm._u([
                   {
@@ -101490,39 +101495,52 @@ var render = function() {
                   {
                     key: "action",
                     fn: function(props) {
-                      return _c("div", { staticClass: "but-group" }, [
+                      return [
                         _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-ghost-warning",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                _vm.openWindow(_vm.getQrUrl(props))
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-qrcode" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-ghost-success",
-                            attrs: { href: _vm.getViewUrl(props) }
-                          },
-                          [_c("i", { staticClass: "fa fa-eye" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-ghost-info",
-                            attrs: { href: _vm.getEditUrl(props) }
-                          },
-                          [_c("i", { staticClass: "fa fa-edit" })]
+                          "b-button-group",
+                          [
+                            _c(
+                              "b-button",
+                              {
+                                staticClass: "btn btn-ghost-success",
+                                on: {
+                                  click: function($event) {
+                                    _vm.openWindow(_vm.getQrUrl(props))
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-qrcode" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-button",
+                              {
+                                staticClass: "btn btn-ghost-warning",
+                                on: {
+                                  click: function($event) {
+                                    _vm.goto(_vm.getViewUrl(props))
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-eye" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-button",
+                              {
+                                staticClass: "btn btn-ghost-danger",
+                                on: {
+                                  click: function($event) {
+                                    _vm.goto(_vm.getEditUrl(props))
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-edit" })]
+                            )
+                          ],
+                          1
                         )
-                      ])
+                      ]
                     }
                   }
                 ])

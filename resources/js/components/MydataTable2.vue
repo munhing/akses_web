@@ -2,11 +2,9 @@
   <div className="animated">
     <b-card>
       <b-card-header>
-        <i class="icon-menu mr-1"></i>Data Table
+        <i class="icon-menu mr-1"></i>Portusers
         <div class="card-header-actions">
-          <a href="https://github.com/matfish2/vue-tables-2" rel="noopener noreferrer" target="_blank" className="card-header-action">
-            <small className="text-muted">docs</small>
-          </a>
+            <b-button size="sm" variant="link" @click="goto('/portusers/create')"><i class="nav-icon icon-people"></i> New Portuser</b-button>
         </div>
       </b-card-header>
       <b-card-body>
@@ -20,11 +18,13 @@
                 <b-badge :variant="getBadge(props.row.expires_on)">Expires {{formatDateHumanize(props.row.expires_on)}}</b-badge>
             </template>            
 
-            <div slot="action" slot-scope="props" class="but-group">
-                <a href="#" class="btn btn-ghost-warning" @click="openWindow(getQrUrl(props))"><i class="fa fa-qrcode"></i></a>
-                <a :href="getViewUrl(props)" class="btn btn-ghost-success"><i class="fa fa-eye"></i></a>
-                <a :href="getEditUrl(props)" class="btn btn-ghost-info"><i class="fa fa-edit"></i></a>
-            </div>
+            <template slot="action" slot-scope="props">
+                <b-button-group>
+                    <b-button class="btn btn-ghost-success" @click="openWindow(getQrUrl(props))"><i class="fa fa-qrcode"></i></b-button>
+                    <b-button class="btn btn-ghost-warning"  @click="goto(getViewUrl(props))"><i class="fa fa-eye"></i></b-button>
+                    <b-button class="btn btn-ghost-danger"  @click="goto(getEditUrl(props))"><i class="fa fa-edit"></i></b-button>
+                </b-button-group>
+            </template>
          
         </v-client-table>
       </b-card-body>
@@ -105,8 +105,12 @@
             openWindow(url) {
                 window.open(url,'QRCode','resizable,height=500,width=400');
                 // this.myModal = true;
+            },
 
-            }
+            goto(url) {
+                window.open(url, '_self');
+                // this.myModal = true;
+            }            
         },
 
         mounted() {
