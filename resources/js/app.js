@@ -7,19 +7,23 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
-import BootstrapVue from 'bootstrap-vue' //Importing
-import vSelect from 'vue-select'
 
-import 'vue-select/dist/vue-select.css';
+import BootstrapVue from 'bootstrap-vue';
+import vSelect from 'vue-select';
+import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+
+
 import AnimatedNumber from "animated-number-vue";
 
-import 'mdbvue/build/css/mdb.css';
-import { mdbDatatable, mdbContainer } from 'mdbvue';
+Vue.use(Vuex);
+Vue.use(BootstrapVue);
+Vue.use(ClientTable);
+Vue.use(ServerTable);
 
-Vue.use(BootstrapVue) // Telling Vue to use this in whole application
-Vue.use(mdbDatatable);
-Vue.use(mdbContainer);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -33,8 +37,7 @@ Vue.use(mdbContainer);
 
 Vue.component('v-select', vSelect);
 Vue.component('animated-number', AnimatedNumber);
-Vue.component('mdb-datatable', mdbDatatable);
-Vue.component('mdb-container', mdbContainer);
+Vue.component('client-table', ClientTable);
 
 Vue.component('profile-list', require('./components/ProfileList.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
@@ -52,7 +55,7 @@ Vue.component('visitor-registration-modal', require('./components/VisitorRegistr
 Vue.component('dashboard', require('./components/Dashboard.vue').default);
 Vue.component('dashboard-card', require('./components/DashboardCard.vue').default);
 
-Vue.component('mydata-table', require('./components/MydataTable.vue').default);
+Vue.component('mydata-table', require('./components/MydataTable2.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -64,9 +67,24 @@ Vue.component('mydata-table', require('./components/MydataTable.vue').default);
 // };
 
 
+const store = new Vuex.Store({
+    state: {
+        entryCount: 25,
+        filterText: ''
+    },
+    plugins: [createPersistedState()],
+    mutations: {
+        setEntryCount(state, count) {
+            state.entryCount = count;
+        },
+        setFilterText(state, filter) {
+            state.filterText = filter;
+        }
+    }
+});
+
 const app = new Vue({
     el: '#app',
-
     data: {
         profiles: [],
         vehicles: [],
@@ -129,7 +147,15 @@ const app = new Vue({
                 .then(response => {
                     this.visitors = response.data;
                 });
-        },              
+        },
+        
+        setEntryCount() {
+            store.commit('setEntryCount');
+        },
+
+        setFilterText() {
+            store.commit('setFilterText');
+        }
     }
 });
 
