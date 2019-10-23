@@ -22,7 +22,7 @@
                               <strong>Edit Portuser</strong>
                           </div>
                           <div class="card-body">
-                              {!! Form::model($portuser, ['route' => ['portusers.update', $portuser->id], 'method' => 'patch', 'enctype'=>'multipart/form-data']) !!}
+                              {!! Form::model($portuser, ['route' => ['portusers.update', $portuser->id], 'method' => 'patch', 'enctype'=>'multipart/form-data', 'id' => 'data-form']) !!}
 
                               @include('portusers.fields')
 

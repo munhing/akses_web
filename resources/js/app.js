@@ -14,7 +14,8 @@ import createPersistedState from 'vuex-persistedstate';
 
 import BootstrapVue from 'bootstrap-vue';
 import vSelect from 'vue-select';
-import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+import Datepicker from 'vuejs-datepicker';
+import {ClientTable} from 'vue-tables-2';
 
 
 import AnimatedNumber from "animated-number-vue";
@@ -22,7 +23,7 @@ import AnimatedNumber from "animated-number-vue";
 Vue.use(Vuex);
 Vue.use(BootstrapVue);
 Vue.use(ClientTable);
-Vue.use(ServerTable);
+Vue.use(Datepicker);
 
 /**
  * The following block of code may be used to automatically register your
@@ -38,6 +39,7 @@ Vue.use(ServerTable);
 Vue.component('v-select', vSelect);
 Vue.component('animated-number', AnimatedNumber);
 Vue.component('client-table', ClientTable);
+Vue.component('datepicker', Datepicker);
 
 Vue.component('profile-list', require('./components/ProfileList.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
@@ -56,6 +58,8 @@ Vue.component('dashboard', require('./components/Dashboard.vue').default);
 Vue.component('dashboard-card', require('./components/DashboardCard.vue').default);
 
 Vue.component('mydata-table', require('./components/MydataTable2.vue').default);
+Vue.component('my-select', require('./components/MySelect.vue').default);
+Vue.component('my-datepicker', require('./components/MyDatePicker.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

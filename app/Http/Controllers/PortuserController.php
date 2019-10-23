@@ -154,6 +154,7 @@ class PortuserController extends AppBaseController
      */
     public function update($id, UpdatePortuserRequest $request)
     {
+        // dd($request);
         $portuser = $this->portuserRepository->find($id);
 
         if (empty($portuser)) {

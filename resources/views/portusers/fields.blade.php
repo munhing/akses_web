@@ -15,21 +15,20 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Company Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('company_id', 'Company Id:') !!}
-
-    {!! Form::select('company_id', $companies, null, ['class' => 'form-control']) !!}
-
+    <my-select default-id="{{ isset($portuser) ? $portuser->company_id : '' }}"></my-select>
 </div>
 
 <!-- Expires On Field -->
+
+
 <div class="form-group col-sm-6">
     {!! Form::label('expires_on', 'Expires On:') !!}
-    {!! Form::text('expires_on', null, ['class' => 'form-control','id'=>'expires_on']) !!}
+    <my-datepicker field-date="{{ isset($portuser) ? $portuser->expires_on : '' }}"></my-datepicker>
 </div>
 
 <div class="form-group col-sm-6">
@@ -37,23 +36,6 @@
 
     <input id="photo" type="file" class="form-control" name="photo">
 </div>
-@section('scripts')
-   <script>
-           $('#expires_on').datetimepicker({
-               format: 'YYYY-MM-DD',
-               useCurrent: true,
-               icons: {
-                   up: "icon-arrow-up-circle icons font-2xl",
-                   down: "icon-arrow-down-circle icons font-2xl"
-               },
-               sideBySide: true
-           });
-           $('#company_id').select2({
-                theme: 'bootstrap'
-            });
-        
-       </script>
-@endsection
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

@@ -5,6 +5,7 @@ use App\Models\ActivePortuser;
 use App\Models\ActiveVehicle;
 use App\Models\ActiveVisitor;
 use App\Models\Portuser;
+use App\Models\Company;
 use App\Models\VisitorCard;
 use App\Events\ClockOut;
 use App\Events\PortuserClockIn;
@@ -70,3 +71,7 @@ Route::get('portusers', 'PortuserController@getPortusers');
 //     // return Portuser::with('company')->paginate(25);
 //     return Portuser::with('company')->get();
 // });
+
+Route::get('getcompanies', function(){
+    return Company::all();
+});
