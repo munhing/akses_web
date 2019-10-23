@@ -8,6 +8,7 @@
             :reduce="option => option.id"
             label="name"
             @input="updateId"
+            selectOnTab
         ></v-select>
         <input type="hidden" id="company_id" name="company_id" v-model="companyId" required>
     </b-form-group>                                         
