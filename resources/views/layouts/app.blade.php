@@ -63,7 +63,7 @@
 </div>
 <footer class="app-footer">
     <div>
-        <a href="http://www.llpm.com.my" target="_blank">Labuan Liberty Port Management Sdn. Bhd. </a>
+        <a href="http://www.llpm.com.my" target="_blank">LLPM </a>
         <span>&copy; 2019 All rights reserved.</span>
     </div>
     <div class="ml-auto">
