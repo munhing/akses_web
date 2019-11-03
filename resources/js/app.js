@@ -8,8 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import Vue from 'vue';
-import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+import store from './store'
 
 
 import BootstrapVue from 'bootstrap-vue';
@@ -20,11 +19,12 @@ import {ClientTable} from 'vue-tables-2';
 
 import AnimatedNumber from "animated-number-vue";
 
-Vue.use(Vuex);
 Vue.use(BootstrapVue);
 Vue.use(ClientTable);
 Vue.use(Datepicker);
 
+
+// var bus = new Vue({});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -66,29 +66,10 @@ Vue.component('my-datepicker', require('./components/MyDatePicker.vue').default)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// let store = {
-//     profiles: []
-// };
-
-
-const store = new Vuex.Store({
-    state: {
-        entryCount: 25,
-        filterText: ''
-    },
-    plugins: [createPersistedState()],
-    mutations: {
-        setEntryCount(state, count) {
-            state.entryCount = count;
-        },
-        setFilterText(state, filter) {
-            state.filterText = filter;
-        }
-    }
-});
 
 const app = new Vue({
     el: '#app',
+    store,
     data: {
         profiles: [],
         vehicles: [],
@@ -153,13 +134,17 @@ const app = new Vue({
                 });
         },
         
-        setEntryCount() {
-            store.commit('setEntryCount');
+        setLimit() {
+            store.commit('setLimit');
         },
 
         setFilterText() {
             store.commit('setFilterText');
         }
+    },
+
+    mounted() {
+                     
     }
 });
 

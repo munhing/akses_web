@@ -15,7 +15,7 @@
             </template>
 
             <template slot="status" slot-scope="props">
-                <b-badge :variant="getBadge(props.row.expires_on)">Expires {{formatDateHumanize(props.row.expires_on)}}</b-badge>
+                <b-badge :variant="getBadge(props.row.expires_on)">{{formatDateHumanize(props.row.expires_on)}}</b-badge>
             </template>            
 
             <template slot="action" slot-scope="props">
@@ -43,9 +43,9 @@
 <script>
     // moment must be import from here for it to work. Import it global somehow will not work.
     import moment from 'moment';
-  
-    export default {
+    import {Event} from 'vue-tables-2';
 
+    export default {
         data() {
             return {
                 myModal: false,
@@ -57,7 +57,7 @@
                         expires_on: 'Expires'
                     },
                     sortable: ['name', 'company.name', 'expires_on'],
-                    filterable: ['name', 'company.name', 'expires_on'],
+                    filterable: ['name', 'company.name', 'uuid', 'expires_on', 'status'],
                     sortIcon: { base:'fa', up:'fa-sort-asc', down:'fa-sort-desc', is:'fa-sort' },
                     columnsDropdown: false,
                     templates: {
@@ -89,13 +89,18 @@
                     :days > 90 ? 'success' : 'primary'
             },
 
+            getDaysPassOrFuture (date) {
+                let days = this.getDateInDays(date);
+                return days <= 0 ? 'Expired' : 'Expires'
+            },
+
             formatDate(date) {
                 return moment(date).format('YYYY-MM-DD');
                 // return moment(date).fromNow() + ' | ' + moment(date).format('YYYY-MM-DD') + ' | ' + moment(date).diff(moment(new Date()), 'days');
             },
  
             formatDateHumanize(date) {
-                return moment(date).fromNow();
+                return this.getDaysPassOrFuture(date) + ' ' + moment(date).fromNow();
             },
 
             getDateInDays(date) {
@@ -110,7 +115,37 @@
             goto(url) {
                 window.open(url, '_self');
                 // this.myModal = true;
-            }            
+            },
+            
+            printTableLog() {
+              console.log('Filter: ' + this.$refs.mytable.query);
+              console.log('Limit: ' + this.$refs.mytable.limit);
+              console.log('Page No: ' + this.$refs.mytable.page);
+              console.log('OrderBy Col: ' + this.$refs.mytable.orderBy.column);
+              console.log('OrderBy Asc: ' + this.$refs.mytable.orderBy.ascending);
+            },
+
+            printStore() {
+              console.log('Filter: ' + this.$store.getters.getQuery);
+              console.log('Limit: ' + this.$store.getters.getLimit);
+              console.log('Page No: ' + this.$store.getters.getPage);
+              console.log('OrderBy Col: ' + this.$store.getters.getOrderBy.column);
+              console.log('OrderBy Asc: ' + this.$store.getters.getOrderBy.ascending);
+            },
+
+            commitToStore() {
+              this.$store.commit('setQuery', this.$refs.mytable.query);
+              this.$store.commit('setLimit', this.$refs.mytable.limit);
+              this.$store.commit('setPage', this.$refs.mytable.page);
+              this.$store.commit('setOrderBy', {
+                'column': this.$refs.mytable.orderBy.column,
+                'ascending': this.$refs.mytable.orderBy.ascending
+              });
+
+              // this.$refs.mytable.setFilter(this.$store.getters.getQuery);
+              // this.$refs.mytable.setPage(this.$store.getters.getPage);
+              // this.$refs.mytable.setOrder(this.$store.getters.getOrderBy.column, this.$store.getters.getOrderBy.ascending);              
+            }
         },
 
         mounted() {
@@ -119,7 +154,48 @@
                     this.data = response.data;
                 });
             
+            this.printStore();
+            
             this.$refs.mytable.toggleColumn('id');
+            this.$refs.mytable.setLimit(this.$store.getters.getLimit);
+            this.$refs.mytable.setFilter(this.$store.getters.getQuery);
+            this.$refs.mytable.setPage(parseInt(this.$store.getters.getPage));
+            this.$refs.mytable.setOrder(this.$store.getters.getOrderBy.column, this.$store.getters.getOrderBy.ascending);
+
+            this.printTableLog();
+        Event.$on('vue-tables.limit', (e) => {
+            console.log('vue-tables.limit: ' + e);
+            // this.printTableLog();
+            this.commitToStore();
+            this.printStore();
+        });
+
+        Event.$on('vue-tables.filter', (e) => {
+          console.log('vue-tables.filter: ' + e);
+          // this.printTableLog();
+          this.commitToStore();
+          this.printStore();
+
+        });  
+        Event.$on('vue-tables.sorted', (e) => {
+            // this.printTableLog();
+            this.commitToStore();
+            this.printStore();
+        });  
+        Event.$on('vue-tables.pagination', (e) => {
+            console.log('vue-tables.pagination: ' + e);
+            // this.printTableLog();
+            this.commitToStore();
+            this.printStore();
+        }); 
+        
+        Event.$on('vue-tables.loaded', (e) => {
+            console.log('vue-tables.loaded: ' + e);
+
+        });      
+        },
+        updated() {
+          this.$refs.mytable.setPage(parseInt(this.$store.getters.getPage));
         }
   };
 </script>
