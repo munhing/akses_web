@@ -20,14 +20,14 @@ class ScanController extends Controller
 
     public function scan(Request $request)
     {
-        return $request;
-        
+        // return $request;
+
         if(isset($request['type'])) {
 
             // if detected visitor
             if ($request['type'] == 1) {
                 // get portuser
-                return $this->akses->getPortuser($uuid);
+                return $this->akses->getPortuser($request['uuid']);
             }
 
             // if detected vehicle
