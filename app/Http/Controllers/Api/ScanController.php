@@ -31,7 +31,10 @@ class ScanController extends Controller
             }
 
             // if detected vehicle
-            if ($request['type'] == 2) {}
+            if ($request['type'] == 2) {
+                // get vwhicle
+                return $this->akses->getVehicle($request['uuid']);
+            }
 
             // if detected visitor
             if ($request['type'] == 3) {}

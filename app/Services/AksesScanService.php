@@ -7,6 +7,7 @@ use App\Events\ClockOut;
 use App\Events\ClockIn;
 use App\Events\PortuserClockIn;
 use App\Models\Portuser;
+use App\Models\Vehicle;
 use App\Models\PortuserActivity;
 use App\Models\ActivePortuser;
 
@@ -64,6 +65,11 @@ class AksesScanService
 
     public function getPortuser($uuid)
     {
-        return Portuser::where('uuid', '=', $uuid)->firstOrFail();
+        return Portuser::where('uuid', '=', $uuid)->with('company', 'media')->firstOrFail();
     }
+
+    public function getVehicle($uuid)
+    {
+        return Vehicle::where('uuid', '=', $uuid)->with('company', 'type')->firstOrFail();
+    }    
 }
