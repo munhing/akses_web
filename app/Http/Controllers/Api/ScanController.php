@@ -20,6 +20,8 @@ class ScanController extends Controller
 
     public function scan(Request $request)
     {
+        return $request;
+        
         if(isset($request['type'])) {
 
             // if detected visitor
