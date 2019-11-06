@@ -73,5 +73,10 @@ class Vehicle extends Model
     {
         return $this->belongsTo('App\Models\VehicleType','vehicle_type_id');
     }
+
+    public function active()
+    {
+        return $this->hasOne('App\Models\ActiveVehicle', 'vehicle_uuid', 'uuid');
+    }
     
 }

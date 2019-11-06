@@ -27,7 +27,9 @@ class ScanController extends Controller
             // if detected visitor
             if ($request['type'] == 1) {
                 // get portuser
-                return $this->akses->getPortuser($request['uuid']);
+                $portuser = $this->akses->getPortuser($request['uuid']);
+
+                return $portuser;
             }
 
             // if detected vehicle

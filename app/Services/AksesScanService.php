@@ -11,6 +11,8 @@ use App\Models\Vehicle;
 use App\Models\PortuserActivity;
 use App\Models\ActivePortuser;
 
+use DB;
+
 class AksesScanService
 {
     public function getActivePortusers()
@@ -65,11 +67,11 @@ class AksesScanService
 
     public function getPortuser($uuid)
     {
-        return Portuser::where('uuid', '=', $uuid)->with('company', 'media')->firstOrFail();
+        return Portuser::where('uuid', '=', $uuid)->with('company', 'media', 'active')->firstOrFail();
     }
 
     public function getVehicle($uuid)
     {
-        return Vehicle::where('uuid', '=', $uuid)->with('company', 'type')->firstOrFail();
+        return Vehicle::where('uuid', '=', $uuid)->with('company', 'type', 'active')->firstOrFail();
     }    
 }

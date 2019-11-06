@@ -68,6 +68,11 @@ class Portuser extends Model implements HasMedia
         return $this->belongsTo('App\Models\Company');
     }
 
+    public function active()
+    {
+        return $this->hasOne('App\Models\ActivePortuser','portuser_uuid','uuid');
+    }
+
     public function registerMediaCollections()
     {
         // $this
