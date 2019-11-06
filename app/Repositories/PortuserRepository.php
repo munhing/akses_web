@@ -40,4 +40,9 @@ class PortuserRepository extends BaseRepository
     {
         return Portuser::class;
     }
+
+    public function getPortuser($uuid)
+    {
+        return Portuser::where('uuid', '=', $uuid)->firstOrFail();
+    }
 }

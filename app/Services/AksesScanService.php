@@ -62,8 +62,8 @@ class AksesScanService
         return $clockingOut;
     }
 
-    public function scan(Request $request)
+    public function getPortuser($uuid)
     {
-        
+        return Portuser::where('uuid', '=', $uuid)->firstOrFail();
     }
 }

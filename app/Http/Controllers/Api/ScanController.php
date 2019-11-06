@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\AksesScanService;
+use App\Models\Portuser;
+use App\Models\Vehicle;
 
 class ScanController extends Controller
 {
@@ -18,11 +20,22 @@ class ScanController extends Controller
 
     public function scan(Request $request)
     {
-        // receive QRcode as teh $request
-        // return $request;
-        // filter qrcode to separate type and uuid
-        // $scanInfo = $this->getScanInfo($request['qrcode']);
-        return $request['uuid'];
+        if(isset($request['type'])) {
+
+            // if detected visitor
+            if ($request['type'] == 1) {
+                // get portuser
+                return $this->akses->getPortuser($uuid);
+            }
+
+            // if detected vehicle
+            if ($request['type'] == 2) {}
+
+            // if detected visitor
+            if ($request['type'] == 3) {}
+        }
+
+        return null;
     }
 
     public function getScanInfo($qrcode)
