@@ -4,9 +4,11 @@ use Illuminate\Http\Request;
 use App\Models\ActivePortuser;
 use App\Models\ActiveVehicle;
 use App\Models\ActiveVisitor;
+use App\Models\ActiveCrew;
 use App\Models\Portuser;
 use App\Models\Company;
 use App\Models\VisitorCard;
+use App\Models\CrewCard;
 use App\Events\ClockOut;
 use App\Events\PortuserClockIn;
 
@@ -45,10 +47,18 @@ Route::get('activevisitors', 'ActiveVisitorController@index');
 Route::post('activevisitors', 'ActiveVisitorController@clockIn');
 Route::delete('activevisitors', 'ActiveVisitorController@clockOut');
 
+Route::get('activecrews', 'ActiveCrewController@index');
+Route::post('activecrews', 'ActiveCrewController@clockIn');
+Route::delete('activecrews', 'ActiveCrewController@clockOut');
+
 Route::post('scan', 'ScanController@scan');
 
 Route::get('getavailablevisitorpass', function(){
     return VisitorCard::where('visitor_uuid','=',null)->get();
+});
+
+Route::get('getavailablecrewpass', function(){
+    return CrewCard::where('crew_uuid','=',null)->get();
 });
 
 Route::get('getactiveportuserscount', function(){
@@ -61,6 +71,10 @@ Route::get('getactivevehiclescount', function(){
 
 Route::get('getactivevisitorscount', function(){
     return ActiveVisitor::count();
+});
+
+Route::get('getactivecrewscount', function(){
+    return ActiveCrew::count();
 });
 
 Route::post('registervisitor', 'ActiveVisitorController@register');

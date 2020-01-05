@@ -55,4 +55,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('portuserActivities', 'PortuserActivityController');
 
+    Route::resource('crews', 'CrewController');
+
+    Route::resource('crewCards', 'CrewCardController');
+
+    Route::resource('activeCrews', 'ActiveCrewController');
+
+    // Route::resource('crewActivities', 'CrewActivityController');    
+
 });

@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     state: {
         portuserTable: {
             limit: 25,
-            query: 'kloc',
+            query: '',
             page: 1,
             orderBy: {
                 column: 'name',

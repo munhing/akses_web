@@ -52,6 +52,9 @@ Vue.component('vehicle-clock-in-modal', require('./components/VehicleClockInModa
 Vue.component('visitor-list', require('./components/VisitorList.vue').default);
 Vue.component('visitor-card', require('./components/VisitorCard.vue').default);
 
+Vue.component('crew-list', require('./components/CrewList.vue').default);
+Vue.component('crew-card', require('./components/CrewCard.vue').default);
+
 Vue.component('visitor-registration-modal', require('./components/VisitorRegistrationModal.vue').default);
 
 Vue.component('dashboard', require('./components/Dashboard.vue').default);
@@ -74,6 +77,7 @@ const app = new Vue({
         profiles: [],
         vehicles: [],
         visitors: [],
+        crews: [],
         search: '',
         options: ['foo', 'bar', 'baz']
     },
@@ -95,7 +99,13 @@ const app = new Vue({
             return this.visitors.filter(visitor => {
                 return (visitor.card.description.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.company.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (visitor.visitor.nric.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
             });           
-        }
+        },
+
+        filteredCrews() {
+            return this.crews.filter(crew => {
+                return (crew.card.description.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (crew.crew.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (crew.crew.vesselName.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) || (crew.crew.nric.toLowerCase().indexOf(this.search.toLowerCase()) !== -1);
+            });           
+        }        
     },
 
     methods: {
@@ -133,7 +143,15 @@ const app = new Vue({
                     this.visitors = response.data;
                 });
         },
-        
+
+        reloadCrewList() {
+
+            axios.get('/api/activecrews')
+                .then(response => {
+                    this.crews = response.data;
+                });
+        },
+
         setLimit() {
             store.commit('setLimit');
         },

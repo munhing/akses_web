@@ -50,6 +50,7 @@
             return {
                 myModal: false,
                 columns: ['id', 'name', 'company.name', 'uuid', 'expires_on', 'status', 'action'],
+                dateColumns: ['expires_on'],
                 data:[],
                 options: {
                     headings: {
