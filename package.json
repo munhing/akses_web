@@ -28,7 +28,7 @@
         "vue": "^2.6.10",
         "vue-chartjs": "^3.4.2",
         "vue-data-scooper": "^0.7.1",
-        "vue-moment": "^4.0.0",
+        "vue-moment": "^4.1.0",
         "vue-multiselect": "^2.1.6",
         "vue-notifications": "0.9.0",
         "vue-select": "^3.2.0",
