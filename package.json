@@ -16,7 +16,7 @@
         "@coreui/icons": "0.3.0",
         "@coreui/vue": "^2.1.2",
         "animated-number-vue": "^1.0.0",
-        "axios": "^0.19",
+        "axios": "^0.21",
         "bootstrap": "^4.3.1",
         "bootstrap-vue": "^2.0.1",
         "font-awesome": "^4.7.0",
