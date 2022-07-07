@@ -21,7 +21,7 @@
         "bootstrap-vue": "^2.0.1",
         "font-awesome": "^4.7.0",
         "laravel-echo": "^1.5.4",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "pusher-js": "^5.0.1",
         "select2": "^4.0.7",
         "simple-line-icons": "^2.4.1",
